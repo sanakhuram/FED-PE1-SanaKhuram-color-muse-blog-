@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Color Muse Blog - create Posts</title>
+  <meta name="description" content="Explore our colorful blog filled with vibrant inspirations and creative insights.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Kurale&family=La+Belle+Aurore&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/post.css">
+  <link rel="icon" type="image/png" href="../assets/favicon-32x32.png">
+  <script type="module" src="../script/shared/auth.mjs"></script>
+  <script type="module" src="../script/createPost.mjs"></script>
+
+</head>
+
+<body>
+  <header>
+    <nav id="main-nav">
+      <input type="checkbox" id="hamburger" class="menu-toggle">
+
+      <!-- Hamburger menu icon for mobile -->
+      <label for="hamburger" class="hamburger-icon">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </label>
+
+      <!-- Navigation menu -->
+      <ul class="text-nav">
+        <li><a href="../html/index.html">Home</a></li>
+        <li><a href="../html/about-us.html">About Us</a></li>
+        <li><a href="/index.html">Blog</a></li>
+      </ul>
+      <div class="auth-links">
+        <a href="../account/login.html">Sign In</a>
+        <a href="../account/register.html">Register</a>
+      </div>
+    </nav>
+  </header>
+  <main class="main-content">
+    <div class="logo">
+      <img src="../assets/final-logo.gif" alt="color muse logo gif" />
+    </div>
+  </main>
+  <section class="welcome">
+    <h1> Create Post </h1>
+
+    <form class="postFormContainer">
+      <label for="imageURL">Image URL</label>
+      <input type="text" id="imageURL" placeholder="Enter image URL" required>
+      
+      <label for="postTitleForm">Post Title</label>
+      <input type="text" id="postTitleForm" placeholder="Enter post title" maxlength="60" required>
+      
+      <label for="postContentForm">Post Content</label>
+      <textarea id="postContentForm" maxlength="10000" rows="12" placeholder="Enter post content" required></textarea>
+      <p id="counter">0/10000</p>
+      
+      
+      <div class="post-button">
+          <button type="submit">Create Post</button>
+      </div>
+  </form>
+  
+   
+    <button class="deleteButtonEditPage">
+      <img class="adminIcons" src="../assets/delete.png" alt="Delete this post button">
+      <p>Delete Post</p>
+    </button>
+  </section>
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img src="../assets/logo.png" alt="Color Muse Logo" />
+      </div>
+      <div class="social-media">
+        <p>Follow us at</p>
+        <a href="#"><img src="../assets/facebook.png" alt="Facebook" /></a>
+        <a href="#"><img src="../assets/youtube.png" alt="YouTube" /></a>
+        <a href="#"><img src="../assets/twitter.png" alt="Twitter" /></a>
+        <a href="#"><img src="../assets/instagram.png" alt="Instagram" /></a>
+      </div>
+      <p>&copy; 2024 Color Muse Blog. All Rights Reserved.</p>
+      <p><a href="#">Terms</a> | <a href="#">Privacy</a></p>
+      <ul class="footer-nav">
+        <li><a href="../html/index.html">Home</a></li>
+        <li><a href="../html/about-us.html">About Us</a></li>
+        <li><a href="/index.html">Blog</a></li>
+        <li><a href="../account/login.html">Sign In</a></li>
+      </ul>
+    </div>
+  </footer>
+</body>
+
+</html>

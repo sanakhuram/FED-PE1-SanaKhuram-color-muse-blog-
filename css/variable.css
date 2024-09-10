@@ -1,0 +1,13 @@
+:root {
+    /* Color Palette */
+    --primary-color-1: #CB9EBB; /* Lavender */
+    --primary-color-2: #E3B23C; /* Gold */
+    --primary-color-3: #FFDBD6; /* Light Pink */
+    --primary-color-4: #423E37; /* Dark Charcoal */
+  
+    /* Typography */
+    --font-primary: 'Kurale', serif;
+    --font-heading: 'Italiana', serif;
+    --font-cursive: 'La Belle Aurore', cursive;
+}
+
