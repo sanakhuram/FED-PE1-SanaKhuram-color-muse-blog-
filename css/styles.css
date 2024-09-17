@@ -244,7 +244,10 @@ body {
     outline: none;
 }
 
-
+.account{
+    margin: 20px auto;
+    text-align: center;
+}
 /* Mobile Responsive */
 @media (max-width: 768px) {
     #register-form {

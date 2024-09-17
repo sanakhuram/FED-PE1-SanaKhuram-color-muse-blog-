@@ -7,17 +7,4 @@ export function isUserSignedIn() {
 }
 
 
-export function toggleCreatePostButton() {
-    const createPostButton = document.querySelector('.create-post-btn'); 
 
-    if (createPostButton) { 
-        if (isUserSignedIn()) {
-         
-            createPostButton.style.display = 'block';
-        } else {
-            createPostButton.style.display = 'none';
-        }
-    } else {
-        console.error('Create post button not found in the DOM');
-    }
-}

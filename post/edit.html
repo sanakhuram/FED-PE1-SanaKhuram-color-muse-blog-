@@ -49,19 +49,23 @@
   <section class="welcome">
     <h1>Edit Post</h1>
   </section>  
-  <form class="postFormContainer" action="../post/index.html" method="get">
+  <form class="postFormContainer" action="#" method="post">
     <label for="imageURL"> Image URL</label>
-    <input type="text" id="imageURL" placeholder="Enter image URL">
+    <input type="text" id="imageURL" placeholder="Enter image URL" required>
+  
     <label for="postTitleForm"> Post Title </label>
-    <input type="text" id="postTitleForm" placeholder="Enter post title" maxlength="60">
+    <input type="text" id="postTitleForm" placeholder="Enter post title" maxlength="60" required>
+  
     <label for="postContentForm"> Post Content </label>
-    <textarea id="postContentForm" maxlength="10000" oninput="updateCounter()" rows="36"
-      placeholder="Enter post content"></textarea>
+    <textarea id="postContentForm" maxlength="2000" oninput="updateCounter()" rows="15"
+      placeholder="Enter post content" required></textarea>
     <p id="counter">0/2000</p>
+    
     <div class="post-button">
-      <button> Save Changes </button>
+      <button type="submit"> Save Changes </button>
     </div>
   </form>
+  
   <button class="deleteButtonEditPage">
     <img class="adminIcons" src="../assets/delete.png" alt="Delete this post button">
     <p>Delete Post</p>

@@ -292,6 +292,44 @@ a.read-more:hover {
 }
 
 .create-post-btn {
-    display: none;
-    margin: 30px auto;
+    margin: 20px auto;
 }
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1400px;
+  }
+.post-card {
+    background-color: #d4a5cf; 
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+}
+.post-image img {
+    width: 100%;
+    border-radius: 15px;
+    object-fit: cover;
+    cursor: pointer;
+}
+.post-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+.author-share {
+    display: flex;
+    align-items: center;
+  }
+  
+  #postAuthor {
+    margin-right: 10px;
+  }
+  
+  .share-icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
