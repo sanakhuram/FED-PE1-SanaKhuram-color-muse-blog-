@@ -1,4 +1,4 @@
-import { BLOG_POSTS_API_ENDPOINT } from "./script/shared/api.mjs";
+import { BLOG_POSTS_ALL } from "./script/shared/api.mjs";
 import { displayBlogPosts } from "./script/grid.mjs";  
 import { setupCarousel } from "./script/carousel.mjs"; 
 import { isUserSignedIn, updateHeader, checkLoginStatus } from "./script/shared/auth.mjs";
@@ -8,13 +8,12 @@ let blogPosts = [];
 
 async function getAllBlogPosts() {
     try {
-        const response = await fetch(BLOG_POSTS_API_ENDPOINT);
+        const response = await fetch(BLOG_POSTS_ALL); 
         if (!response.ok) {
             console.log("Error: API response is not OK.");
             return [];
         }
         const json = await response.json();
-        console.log("API Response: ", json);
         return json;
     } catch (error) {
         console.error("Error fetching posts: ", error);

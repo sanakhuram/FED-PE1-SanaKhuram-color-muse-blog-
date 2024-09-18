@@ -29,7 +29,6 @@ async function loginUser() {
       }),
     };
 
-
     const response = await fetch(LOGIN_API_ENDPOINT, customOptions);
 
     if (!response.ok) {
@@ -39,16 +38,13 @@ async function loginUser() {
     const json = await response.json();
     console.log(json);
 
-
     const newAccessToken = json.data.accessToken;
  
     localStorage.setItem('accessToken', newAccessToken);
     localStorage.setItem('username', name);
 
-   
     updateHeader(name);
 
- 
     if (name.toLowerCase() === 'sana') {
       window.location.href = '../post/manage.html';
     } else {

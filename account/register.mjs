@@ -1,4 +1,3 @@
-//register.mjs
 import { REGISTER_API_ENDPOINT } from "../script/shared/api.mjs";
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -24,8 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        console.log('Register user has been called', { name, email, password });
-
         try {
             const customOptions = {
                 method: 'POST',
@@ -38,8 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     password: password,
                 }),
             };
-
-            console.log('Sending request with options:', customOptions);
 
             const response = await fetch(REGISTER_API_ENDPOINT, customOptions);
 

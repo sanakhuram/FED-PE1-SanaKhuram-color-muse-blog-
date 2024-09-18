@@ -1,11 +1,9 @@
-import { BLOG_POSTS_API_ENDPOINT } from './shared/api.mjs'; 
+import { BLOG_POSTS_ALL } from './shared/api.mjs'; 
 import { isUserSignedIn } from './shared/auth.mjs'; 
 
 export async function setupCarousel() {
   try {
-    // Fetch posts from the API
-    const response = await fetch(BLOG_POSTS_API_ENDPOINT);
-    
+    const response = await fetch(BLOG_POSTS_ALL);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -18,12 +16,8 @@ export async function setupCarousel() {
       return;
     }
 
-    console.log("Posts for carousel: ", posts); 
-
-  
     const latestPosts = posts.sort((a, b) => new Date(b.created) - new Date(a.created)).slice(0, 3);
 
-   
     const carouselImage = document.querySelector(".carousel-blog-post-image");
     const carouselTitle = document.getElementById("carousel-title");
     const scrollLeftButton = document.querySelector(".scroll-left");
@@ -31,22 +25,16 @@ export async function setupCarousel() {
 
     let currentIndex = 0;
 
-   
     function updateCarousel() {
       const currentPost = latestPosts[currentIndex];
-      console.log("Current Post in Carousel:", currentPost); 
 
       if (!currentPost) {
-        console.error("Invalid post data:", currentIndex);
         carouselImage.src = 'https://via.placeholder.com/600x400?text=No+Image';
         carouselTitle.textContent = 'Untitled Post';
         return;
       }
 
-      const imageUrl =
-        currentPost.media?.url || 
-        'https://via.placeholder.com/600x400?text=No+Image'; 
-
+      const imageUrl = currentPost.media?.url || 'https://via.placeholder.com/600x400?text=No+Image'; 
       const title = currentPost.title || 'Untitled Post';
 
       carouselImage.src = imageUrl;
@@ -54,9 +42,8 @@ export async function setupCarousel() {
       carouselImage.dataset.postId = currentPost.id;
     }
 
-    updateCarousel(); 
+    updateCarousel();
 
-    
     scrollLeftButton.addEventListener('click', () => {
       currentIndex = (currentIndex - 1 + latestPosts.length) % latestPosts.length;
       updateCarousel();
@@ -67,19 +54,13 @@ export async function setupCarousel() {
       updateCarousel();
     });
 
-    
     carouselImage.addEventListener('click', () => {
       const postId = carouselImage.dataset.postId;
-      
-
       if (isUserSignedIn()) {
         if (postId) {
           window.location.href = `./post/index.html?id=${postId}`;
-        } else {
-          console.error("Post ID is missing");
         }
       } else {
-       
         window.location.href = './account/login.html';
       }
     });
