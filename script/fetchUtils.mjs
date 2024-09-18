@@ -15,7 +15,7 @@ export async function fetchPosts() {
     }
   }
 
-  // Filter posts by the current logged-in user
+
   if (currentUser) {
     posts = posts.filter(post => post.author === currentUser);
   }

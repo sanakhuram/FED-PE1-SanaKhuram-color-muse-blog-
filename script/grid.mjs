@@ -1,7 +1,7 @@
 export function displayBlogPosts(posts) {
   const postListContainer = document.querySelector(".blog-posts");
 
-  postListContainer.innerHTML = ""; // Clear existing content
+  postListContainer.innerHTML = ""; 
 
   if (!Array.isArray(posts) || posts.length === 0) { 
       postListContainer.innerHTML = "<p>No blog posts available. Create one to get started!</p>";
@@ -10,7 +10,7 @@ export function displayBlogPosts(posts) {
   }
 
   posts.forEach((post) => {
-      console.log("Rendering post: ", post); // Log each post to see if it's processed
+      console.log("Rendering post: ", post); 
 
       const postElement = document.createElement("div");
       postElement.classList.add("blog-post");
@@ -28,21 +28,21 @@ export function displayBlogPosts(posts) {
       postListContainer.appendChild(postElement);
   });
 
-  // Add event listeners for "Read More" links after posts have been rendered
+
   document.querySelectorAll('.read-more').forEach(link => {
     link.addEventListener('click', function(event) {
-      event.preventDefault(); // Prevent default link behavior
+      event.preventDefault();
       const postId = this.getAttribute('data-id');
       
-      // Check if the user is signed in
+    
       const accessToken = localStorage.getItem('accessToken');
       if (accessToken) {
-        // If signed in, redirect to the post.html
+   
         window.location.href = `./post/index.html?id=${postId}`;
       } else {
-        // If not signed in, prompt them to log in
+       
         alert('Please sign in to view this post.');
-        window.location.href = './account/login.html'; // Redirect to login page
+        window.location.href = './account/login.html'; 
       }
     });
   });

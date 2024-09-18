@@ -2,14 +2,14 @@ import { BLOG_POSTS_API_ENDPOINT, DELETE_POST_API_ENDPOINT } from './shared/api.
 import { isUserSignedIn, checkLoginStatus } from './shared/auth.mjs'; 
 
 document.addEventListener('DOMContentLoaded', async () => {
-  checkLoginStatus(); // Ensure user is logged in
+  checkLoginStatus(); 
 
   if (!isUserSignedIn()) {
-    window.location.href = '../account/login.html'; // Redirect if not signed in
+    window.location.href = '../account/login.html'; 
     return;
   }
 
-  // Function to fetch posts from the API
+ 
   async function fetchPosts() {
     try {
       const response = await fetch(BLOG_POSTS_API_ENDPOINT);
@@ -17,14 +17,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         throw new Error('Error fetching posts.');
       }
       const posts = await response.json();
-      return posts.data; // Assuming posts are in the "data" field
+      return posts.data; 
     } catch (error) {
       console.error('Error fetching posts:', error);
       return [];
     }
   }
 
-  // Function to delete a post by ID
+ 
   async function deletePost(postId) {
     const confirmDelete = confirm('Are you sure you want to delete this post?');
     if (!confirmDelete) return;
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const response = await fetch(DELETE_POST_API_ENDPOINT(postId), {
         method: 'DELETE',
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`, // Use token for authentication
+          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`, 
         },
       });
 
@@ -42,24 +42,24 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
 
       alert('Post deleted successfully.');
-      window.location.reload(); // Reload the page to reflect the deleted post
+      window.location.reload();
     } catch (error) {
       console.error('Error deleting post:', error);
     }
   }
 
-  // Function to render posts
+
   function renderPosts(posts) {
-    const postsContainer = document.querySelector('.post-grid'); // Container for the posts
-    postsContainer.innerHTML = ''; // Clear any existing content
+    const postsContainer = document.querySelector('.post-grid'); 
+    postsContainer.innerHTML = ''; 
 
     if (posts.length === 0) {
-      postsContainer.innerHTML = '<p>No posts available.</p>'; // Show this if there are no posts
+      postsContainer.innerHTML = '<p>No posts available.</p>'; 
       return;
     }
 
     posts.forEach((post) => {
-      // Create post card dynamically based on the structure you like
+      
       const postCard = document.createElement('div');
       postCard.classList.add('post-card');
       
@@ -78,28 +78,28 @@ document.addEventListener('DOMContentLoaded', async () => {
       postsContainer.appendChild(postCard);
     });
 
-    // Add event listeners for Edit and Delete buttons
+ 
     document.querySelectorAll('.edit-btn').forEach(button => {
       button.addEventListener('click', (e) => {
         const postId = e.target.getAttribute('data-id');
-        window.location.href = `../post/edit.html?id=${postId}`; // Redirect to edit page with post ID
+        window.location.href = `../post/edit.html?id=${postId}`; 
       });
     });
 
     document.querySelectorAll('.delete-btn').forEach(button => {
       button.addEventListener('click', (e) => {
         const postId = e.target.getAttribute('data-id');
-        deletePost(postId); // Call the delete function
+        deletePost(postId); 
       });
     });
   }
 
-  // Fetch and render posts on page load
+
   const posts = await fetchPosts();
   renderPosts(posts);
 });
 
-// Add click event for creating a post
+
 document.querySelector('.create-post-btn').addEventListener('click', () => {
-  window.location.href = '../post/createPost.html'; // Redirect to the create post page
+  window.location.href = '../post/createPost.html';
 });

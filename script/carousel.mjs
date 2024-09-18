@@ -1,5 +1,5 @@
-import { BLOG_POSTS_API_ENDPOINT } from './shared/api.mjs'; // Adjust the import based on your folder structure
-import { isUserSignedIn } from './shared/auth.mjs'; // Import auth check
+import { BLOG_POSTS_API_ENDPOINT } from './shared/api.mjs'; 
+import { isUserSignedIn } from './shared/auth.mjs'; 
 
 export async function setupCarousel() {
   try {
@@ -10,20 +10,20 @@ export async function setupCarousel() {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const data = await response.json(); // Parse JSON response
-    const posts = Array.isArray(data.data) ? data.data : []; // Check if 'data' contains posts
+    const data = await response.json(); 
+    const posts = Array.isArray(data.data) ? data.data : []; 
 
     if (posts.length === 0) {
       console.error("No posts provided to the carousel.");
       return;
     }
 
-    console.log("Posts for carousel: ", posts); // Log posts for debugging
+    console.log("Posts for carousel: ", posts); 
 
-    // Sort the posts by the created date to get the latest posts
+  
     const latestPosts = posts.sort((a, b) => new Date(b.created) - new Date(a.created)).slice(0, 3);
 
-    // Select carousel elements
+   
     const carouselImage = document.querySelector(".carousel-blog-post-image");
     const carouselTitle = document.getElementById("carousel-title");
     const scrollLeftButton = document.querySelector(".scroll-left");
@@ -31,10 +31,10 @@ export async function setupCarousel() {
 
     let currentIndex = 0;
 
-    // Function to update the carousel display
+   
     function updateCarousel() {
       const currentPost = latestPosts[currentIndex];
-      console.log("Current Post in Carousel:", currentPost); // Debugging log
+      console.log("Current Post in Carousel:", currentPost); 
 
       if (!currentPost) {
         console.error("Invalid post data:", currentIndex);
@@ -44,8 +44,8 @@ export async function setupCarousel() {
       }
 
       const imageUrl =
-        currentPost.media?.url || // Check if media URL exists
-        'https://via.placeholder.com/600x400?text=No+Image'; // Fallback image
+        currentPost.media?.url || 
+        'https://via.placeholder.com/600x400?text=No+Image'; 
 
       const title = currentPost.title || 'Untitled Post';
 
@@ -54,9 +54,9 @@ export async function setupCarousel() {
       carouselImage.dataset.postId = currentPost.id;
     }
 
-    updateCarousel(); // Initialize the first post
+    updateCarousel(); 
 
-    // Event listeners for carousel navigation
+    
     scrollLeftButton.addEventListener('click', () => {
       currentIndex = (currentIndex - 1 + latestPosts.length) % latestPosts.length;
       updateCarousel();
@@ -67,11 +67,11 @@ export async function setupCarousel() {
       updateCarousel();
     });
 
-    // Navigate to the post preview on carousel image click
+    
     carouselImage.addEventListener('click', () => {
       const postId = carouselImage.dataset.postId;
       
-      // If user is signed in, allow access to post, otherwise redirect to login
+
       if (isUserSignedIn()) {
         if (postId) {
           window.location.href = `./post/index.html?id=${postId}`;
@@ -79,7 +79,7 @@ export async function setupCarousel() {
           console.error("Post ID is missing");
         }
       } else {
-        // Redirect to login if not signed in
+       
         window.location.href = './account/login.html';
       }
     });

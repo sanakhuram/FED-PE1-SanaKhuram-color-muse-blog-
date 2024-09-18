@@ -1,19 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="img-src * data:;" />
   <title>Color Muse Blog - Blog Posts</title>
-  <meta name="description" content="Explore our colorful blog filled with vibrant inspirations and creative insights.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+    content="Explore our colorful blog filled with vibrant inspirations and creative insights." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Kurale&family=La+Belle+Aurore&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="../css/global.css">
-  <link rel="stylesheet" href="../css/styles.css">
-  <link rel="stylesheet" href="../css/post.css">
-  <link rel="icon" type="image/png" href="../assets/favicon-32x32.png">
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/post.css" />
+  <link rel="icon" type="image/png" href="../assets/favicon-32x32.png" />
   <script type="module" src="../script/shared/auth.mjs"></script>
+  <script type="module" src="./script/searchSort.mjs"></script>
   <script type="module" src="index.mjs"></script>
 </head>
 
@@ -43,9 +45,12 @@
   </header>
   <main class="main-content">
     <div class="logo">
-      <img src="../assets/final-logo.gif" alt="color muse logo gif" />
+      <a href="/index.html">
+        <img src="../assets/final-logo.gif" alt="color muse logo gif" />
+      </a>
     </div>
   </main>
+
   <section class="welcome">
     <h1>"Your Guide to Colorful Inspirations"</h1>
   </section>
@@ -62,10 +67,28 @@
   <button class="scroll-right">Next</button>
 </div>
 
-
- 
 <div class="blog-posts-container">
   <h2 class="blog-post-heading">Blog Posts</h2>
+  <div class="sorting">
+    <select id="sort-filter">
+      <option value="latest">Latest</option>
+      <option value="oldest">Oldest</option>
+    </select>
+
+    <!-- Sort by title (A-Z / Z-A) -->
+    <select id="sort-filter-title">
+      <option value="title-asc">Title (A-Z)</option>
+      <option value="title-desc">Title (Z-A)</option>
+    </select>
+
+    <!-- Search bar for filtering by title -->
+    <div id="search">
+      <input type="text" id="search-bar" placeholder="Search by title..." />
+    </div>
+  </div>
+
+
+  <div id="manage-post-btn-container"></div>
   <div class="blog-posts">
   </div>
 <div id="blog-post-display"></div>
@@ -87,7 +110,7 @@
       <p><a href="#">Terms</a> | <a href="#">Privacy</a></p>
       <ul class="footer-nav">
         <li><a href="./index.html" class="active">Home</a></li>
-        <li><a href="./html/about-us.html">About Us</a></li>
+        <li><a href="./html/about-us.html">About</a></li>
         <li><a href="/index.html">Blog</a></li>
         <li><a href="./account/login.html">Sign In</a></li>
       </ul>

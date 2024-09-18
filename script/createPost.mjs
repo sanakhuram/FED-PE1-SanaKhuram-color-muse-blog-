@@ -1,20 +1,20 @@
 import { getAccessToken } from '../../script/shared/accessToken.mjs';
 import { BLOG_POSTS_API_ENDPOINT } from "../../script/shared/api.mjs";
 
-// Select elements
+
 const postForm = document.querySelector('.postFormContainer');
 const postTitleInput = document.getElementById('postTitleForm');
 const postContentInput = document.getElementById('postContentForm');
 const imageUrlInput = document.getElementById('imageURL');
 const counterDisplay = document.getElementById('counter');
 
-// Update character counter function
+
 function updateCounter() {
     const currentLength = postContentInput.value.length;
     counterDisplay.textContent = `${currentLength}/10000`;
 }
 
-// Attach the input event listener to the textarea
+
 postContentInput.addEventListener('input', updateCounter);
 
 postForm.addEventListener('submit', async (event) => {
@@ -82,9 +82,9 @@ async function saveToAPI(post) {
             throw new Error('Failed to save post to the API');
         }
         const result = await response.json();
-        console.log(result);  // Log the response, handle if necessary
+        console.log(result); 
     } catch (error) {
         console.error('Error saving post to API:', error);
-        throw error;  // Rethrow to handle in the calling function
+        throw error; 
     }
 }

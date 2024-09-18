@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const email = registerEmailInput.value;
         const password = registerPasswordInput.value;
 
-        // Client-side validation for email format
         if (!email.endsWith('@stud.noroff.no')) {
             alert('Please use a valid stud.noroff.no email address.');
             return;
@@ -53,8 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const json = await response.json();
             console.log('Registration response:', json);
             alert('You are now registered. Redirecting to the sign-in page...');
-            window.location.href = '../account/login.html'; // Adjust this path if necessary
-
+            window.location.href = '../account/login.html'; 
         } catch (error) {
             console.error('Error during registration:', error);
             alert(`Error during registration: ${error.message}`);

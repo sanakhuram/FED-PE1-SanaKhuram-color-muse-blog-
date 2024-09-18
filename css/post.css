@@ -299,10 +299,11 @@ a.read-more:hover {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
     padding: 20px;
-    max-width: 1400px;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 .post-card {
-    background-color: #d4a5cf; 
+    background-color: var(--primary-color-1); 
     border-radius: 20px;
     padding: 20px;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
@@ -310,8 +311,13 @@ a.read-more:hover {
 .post-image img {
     width: 100%;
     border-radius: 15px;
+    border: 1px solid var(--primary-color-4);
     object-fit: cover;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+    background-color: var(--primary-color-2);
     cursor: pointer;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+
 }
 .post-buttons {
     display: flex;
