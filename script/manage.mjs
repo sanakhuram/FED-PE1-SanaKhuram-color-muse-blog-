@@ -15,29 +15,6 @@ async function fetchPosts() {
     }
 }
 
-async function deletePost(postId) {
-    const confirmDelete = confirm('Are you sure you want to delete this post?');
-    if (!confirmDelete) return;
-
-    try {
-        const response = await fetch(DELETE_POST_API_ENDPOINT(postId), {
-            method: 'DELETE',
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-            },
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to delete post.');
-        }
-
-        alert('Post deleted successfully.');
-        window.location.reload();
-    } catch (error) {
-        console.error('Error deleting post:', error);
-    }
-}
-
 function renderPosts(posts) {
     const postsContainer = document.querySelector('.post-grid'); 
     postsContainer.innerHTML = ''; 
@@ -54,12 +31,22 @@ function renderPosts(posts) {
         postCard.innerHTML = `
             <div class="post-image">
                 <a href="../post/index.html?id=${post.id}">
-                    <img src="${post.media?.url || 'https://via.placeholder.com/600x400'}" alt="Post Image">
+                    <img src="${post.media?.url || 'https://via.placeholder.com/150x100'}" alt="Post Image">
                 </a>
             </div>
+            <div class="post-title">
+                <h3>${post.title}</h3>
+            </div>
             <div class="post-buttons">
-                <button class="edit-btn" data-id="${post.id}">Edit</button>
-                <button class="delete-btn" data-id="${post.id}">Delete</button>
+                <button class="edit-btn" data-id="${post.id}">
+                    <i class="fas fa-edit"></i> Edit
+                </button>
+                <a href="../post/index.html?id=${post.id}" class="view-icon">
+                    <i class="fas fa-eye"></i>
+                </a>
+                <button class="delete-btn" data-id="${post.id}">
+                    <i class="fas fa-trash"></i> Delete
+                </button>
             </div>
         `;
 
@@ -80,6 +67,7 @@ function renderPosts(posts) {
         });
     });
 }
+
 
 document.addEventListener('DOMContentLoaded', async () => {
    

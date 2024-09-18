@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="../css/global.css" />
   <link rel="stylesheet" href="../css/styles.css" />
   <link rel="stylesheet" href="../css/post.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="icon" type="image/png" href="../assets/favicon-32x32.png" />
   <script type="module" src="../script/shared/auth.mjs"></script>
   <script type="module" src="./script/searchSort.mjs"></script>
@@ -55,7 +56,7 @@
     <h1>"Your Guide to Colorful Inspirations"</h1>
   </section>
 <div class="carousel">
-  <button class="scroll-left">Previous</button>
+  <button class="scroll-left"><i class="fas fa-chevron-left"></i></button>
   
   <div class="carousel-blog-post">
     <div class="image-container">
@@ -64,7 +65,7 @@
     </div>
   </div>
   
-  <button class="scroll-right">Next</button>
+  <button class="scroll-right"><i class="fas fa-chevron-right"></i></button>
 </div>
 
 <div class="blog-posts-container">
@@ -74,25 +75,30 @@
       <option value="latest">Latest</option>
       <option value="oldest">Oldest</option>
     </select>
-
-    <!-- Sort by title (A-Z / Z-A) -->
+  
     <select id="sort-filter-title">
       <option value="title-asc">Title (A-Z)</option>
       <option value="title-desc">Title (Z-A)</option>
     </select>
-
-    <!-- Search bar for filtering by title -->
+  
     <div id="search">
       <input type="text" id="search-bar" placeholder="Search by title..." />
+      <i class="fa-solid fa-magnifying-glass"></i> 
     </div>
   </div>
-
+  
 
   <div id="manage-post-btn-container"></div>
   <div class="blog-posts">
   </div>
 <div id="blog-post-display"></div>
 </div>
+<div class="pagination">
+  <button class="pagination-previous"><i class="fas fa-chevron-left"></i></button>
+  <span id="pagination-info"></span> <!-- Display the current page info here -->
+  <button class="pagination-next"><i class="fas fa-chevron-right"></i></button>
+</div>
+
   <!-- Footer -->
   <footer>
     <div class="footer-content">

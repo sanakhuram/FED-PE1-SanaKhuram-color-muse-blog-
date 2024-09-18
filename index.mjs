@@ -1,14 +1,15 @@
 import { BLOG_POSTS_ALL } from "./script/shared/api.mjs";
-import { displayBlogPosts } from "./script/grid.mjs";  
-import { setupCarousel } from "./script/carousel.mjs"; 
+import { displayBlogPosts } from "./script/grid.mjs";
+import { setupCarousel } from "./script/carousel.mjs";
 import { isUserSignedIn, updateHeader, checkLoginStatus } from "./script/shared/auth.mjs";
 import { sortAndFilterPosts } from './script/searchSort.mjs';
+import { displayPaginatedPosts } from './script/pagination.mjs'; // Import pagination logic
 
-let blogPosts = []; 
+let blogPosts = [];
 
 async function getAllBlogPosts() {
     try {
-        const response = await fetch(BLOG_POSTS_ALL); 
+        const response = await fetch(BLOG_POSTS_ALL);
         if (!response.ok) {
             console.log("Error: API response is not OK.");
             return [];
@@ -26,15 +27,14 @@ async function main() {
     blogPosts = Array.isArray(blogResponse.data) ? blogResponse.data : [];
 
     if (blogPosts.length > 0) {
-        displayBlogPosts(blogPosts);  
-        const lastThreePosts = blogPosts.slice(0, 3);  
-        setupCarousel(lastThreePosts);  
-        addSortAndSearchListeners();  
+        displayPaginatedPosts(blogPosts, displayBlogPosts); // Use paginated posts display
+        const lastThreePosts = blogPosts.slice(0, 3);
+        setupCarousel(lastThreePosts);
+        addSortAndSearchListeners();
     } else {
         console.log("No blog posts found.");
     }
 }
-
 
 function addSortAndSearchListeners() {
     document.getElementById('sort-filter').addEventListener('change', () => sortAndFilterPosts(blogPosts));
@@ -48,8 +48,9 @@ function showManagePostButton() {
 
     if (isUserSignedIn() && username && username.toLowerCase() === 'sana') {
         const managePostButton = document.createElement('button');
-        managePostButton.textContent = 'Manage Posts';
         managePostButton.classList.add('manage-post-btn');
+
+        managePostButton.innerHTML = '<i class="fas fa-tasks"></i> Manage Posts';
 
         managePostButton.addEventListener('click', () => {
             window.location.href = '../post/manage.html';
@@ -64,5 +65,5 @@ function showManagePostButton() {
 document.addEventListener('DOMContentLoaded', () => {
     checkLoginStatus();
     main(); 
-    showManagePostButton(); 
+    showManagePostButton();
 });

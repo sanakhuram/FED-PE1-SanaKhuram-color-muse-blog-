@@ -270,6 +270,7 @@ h1{
     text-align: center;
     padding: 35px;
     color: var(--primary-color-4);
+    box-shadow: 4px 4px 4px var(--primary-color-1);
     animation: scaleUp 0.8s ease-out;
 }
 .welcome p{

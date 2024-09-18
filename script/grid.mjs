@@ -22,25 +22,23 @@ export function displayBlogPosts(posts) {
           <h3>${post.title}</h3>
           <img src="${imageUrl}" alt="Post Image">
           <p>${truncatedContent}</p>
-          <a href="#" class="read-more" data-id="${post.id}">Read More</a>
+          <a href="#" class="read-more" data-id="${post.id}">
+            Read More <i class="fas fa-arrow-right"></i> 
+          </a>
       `;
 
       postListContainer.appendChild(postElement);
   });
-
 
   document.querySelectorAll('.read-more').forEach(link => {
     link.addEventListener('click', function(event) {
       event.preventDefault();
       const postId = this.getAttribute('data-id');
       
-    
       const accessToken = localStorage.getItem('accessToken');
       if (accessToken) {
-   
         window.location.href = `./post/index.html?id=${postId}`;
       } else {
-       
         alert('Please sign in to view this post.');
         window.location.href = './account/login.html'; 
       }

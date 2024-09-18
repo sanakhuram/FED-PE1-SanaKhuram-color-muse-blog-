@@ -392,17 +392,19 @@ button:hover {
         font-size: 20px;
     }
 }
-
-.sorting{
+.sorting {
     margin: 20px auto;
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 20px; 
     background-color: var(--primary-color-3);
     padding: 20px;
-  }
-  
-  select {
+    flex-wrap: wrap; 
+    box-shadow: 4px 4px 8px var(--primary-color-3);
+}
+
+select {
     padding: 8px 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -410,29 +412,51 @@ button:hover {
     background-color: white;
     cursor: pointer;
     transition: border-color 0.3s ease, background-color 0.3s ease;
-  }
-  
-  select:focus {
-    outline: none;
-    background-color: #fff; 
-  }
+    box-shadow: 4px 4px 4px var(--primary-color-1);
+}
 
-  #search-bar {
-    padding: 8px 12px;
-    width: 200px; 
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-    transition: border-color 0.3s ease;
-  }
-  
-  #search-bar:focus {
+select:focus {
     outline: none;
-  }
-  
-  div > select {
+    background-color: #fff;
+}
+
+#search {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 300px; 
+}
+
+#search-bar {
+    width: 100%;
+    padding: 10px;
+    padding-right: 40px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    box-shadow: 4px 4px 4px var(--primary-color-1);
+}
+
+#search i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #df7eda;
+    font-size: 18px;
+    pointer-events: none;
+}
+
+#search-bar:focus {
+    outline: none;
+}
+
+div > select {
     margin-right: 10px;
-  }
+}
+
+
 
   @media (max-width: 768px) {
     .sorting{
@@ -442,17 +466,76 @@ button:hover {
       margin: 0 auto;
     }
   }
-  .manage-post-btn {
-    background-color: #ffcc66;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    margin: 20px 0;
-    border-radius: 5px;
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
   }
   
-  .manage-post-btn:hover {
-    background-color: #ff9966;
+
+ 
+  .manage-post-btn { 
+   margin: 20px auto;
+   align-items: center;
+   padding: 10px 20px;
+   box-shadow: 4px 8px 8px var(--primary-color-4);
+}
+
+.manage-post-btn i {
+    font-size: 18px; 
+}
+
+.read-more {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--primary-color-4);
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.read-more i {
+    margin-left: 5px;
+    font-size: 14px; /* Adjust the icon size */
+    transition: transform 0.3s ease;
+}
+
+.read-more:hover {
+    color: #ec4f28;
+}
+
+.read-more:hover i {
+    transform: translateX(3px); /* Makes the arrow move on hover */
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+  }
+  
+  .pagination button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 10px;
+    transition: color 0.3s ease;
+    margin-bottom: 20px;
+  }
+
+  .pagination-previous i, .pagination-next i {
+    font-size: 20px;
+    color: #333;
+  }
+  
+  #pagination-info {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
   }
   
