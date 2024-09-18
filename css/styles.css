@@ -21,7 +21,7 @@
 
     100% {
         opacity: 1;
-        transform: scale(1);/
+        transform: scale(1);
     }
 }
 
@@ -499,7 +499,7 @@ div > select {
 
 .read-more i {
     margin-left: 5px;
-    font-size: 14px; /* Adjust the icon size */
+    font-size: 14px;
     transition: transform 0.3s ease;
 }
 
@@ -508,7 +508,7 @@ div > select {
 }
 
 .read-more:hover i {
-    transform: translateX(3px); /* Makes the arrow move on hover */
+    transform: translateX(3px); 
 }
 .pagination {
     display: flex;
