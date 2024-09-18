@@ -3,7 +3,7 @@ import { displayBlogPosts } from "./script/grid.mjs";
 import { setupCarousel } from "./script/carousel.mjs";
 import { isUserSignedIn, updateHeader, checkLoginStatus } from "./script/shared/auth.mjs";
 import { sortAndFilterPosts } from './script/searchSort.mjs';
-import { displayPaginatedPosts } from './script/pagination.mjs'; // Import pagination logic
+import { displayPaginatedPosts } from './script/pagination.mjs'; 
 
 let blogPosts = [];
 
@@ -27,7 +27,7 @@ async function main() {
     blogPosts = Array.isArray(blogResponse.data) ? blogResponse.data : [];
 
     if (blogPosts.length > 0) {
-        displayPaginatedPosts(blogPosts, displayBlogPosts); // Use paginated posts display
+        displayPaginatedPosts(blogPosts, displayBlogPosts); 
         const lastThreePosts = blogPosts.slice(0, 3);
         setupCarousel(lastThreePosts);
         addSortAndSearchListeners();

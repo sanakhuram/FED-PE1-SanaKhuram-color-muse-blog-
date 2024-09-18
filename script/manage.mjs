@@ -23,7 +23,7 @@ async function deletePost(postId) {
         const response = await fetch(DELETE_POST_API_ENDPOINT(postId), {
             method: 'DELETE',
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,  // Authorization
+                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`, 
             },
         });
 
@@ -32,7 +32,7 @@ async function deletePost(postId) {
         }
 
         alert('Post deleted successfully.');
-        window.location.reload();  // Reload the page after deletion
+        window.location.reload();  
     } catch (error) {
         console.error('Error deleting post:', error);
         alert('Failed to delete post. Please try again later.');
@@ -87,7 +87,7 @@ function renderPosts(posts) {
     document.querySelectorAll('.delete-btn').forEach(button => {
         button.addEventListener('click', (e) => {
             const postId = e.target.getAttribute('data-id');
-            console.log('Deleting post with ID:', postId);  // Debugging
+            console.log('Deleting post with ID:', postId);  
             deletePost(postId); 
         });
     });
