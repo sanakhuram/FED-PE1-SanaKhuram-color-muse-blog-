@@ -1,5 +1,5 @@
 import { BLOG_POSTS_ALL, DELETE_POST_API_ENDPOINT } from './shared/api.mjs';
-import { updateHeader, isUserSignedIn, checkLoginStatus } from './shared/auth.mjs'; 
+import { updateHeader, checkLoginStatus } from './shared/auth.mjs'; 
 
 async function fetchPosts() {
     try {
@@ -12,6 +12,30 @@ async function fetchPosts() {
     } catch (error) {
         console.error('Error fetching posts:', error);
         return [];
+    }
+}
+
+async function deletePost(postId) {
+    const confirmDelete = confirm('Are you sure you want to delete this post?');
+    if (!confirmDelete) return;
+
+    try {
+        const response = await fetch(DELETE_POST_API_ENDPOINT(postId), {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,  // Authorization
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to delete post.');
+        }
+
+        alert('Post deleted successfully.');
+        window.location.reload();  // Reload the page after deletion
+    } catch (error) {
+        console.error('Error deleting post:', error);
+        alert('Failed to delete post. Please try again later.');
     }
 }
 
@@ -63,19 +87,17 @@ function renderPosts(posts) {
     document.querySelectorAll('.delete-btn').forEach(button => {
         button.addEventListener('click', (e) => {
             const postId = e.target.getAttribute('data-id');
+            console.log('Deleting post with ID:', postId);  // Debugging
             deletePost(postId); 
         });
     });
 }
 
-
 document.addEventListener('DOMContentLoaded', async () => {
-   
     checkLoginStatus();
     const username = localStorage.getItem('username');
-    updateHeader(username);  
+    updateHeader(username);
 
-  
     const posts = await fetchPosts();
     renderPosts(posts);
 });
