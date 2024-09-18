@@ -109,12 +109,11 @@ nav ul.text-nav li a:hover {
         width: 100%;
     }
 
-    /* When the checkbox is checked, show the navigation */
+
     .menu-toggle:checked + .hamburger-icon + ul.text-nav {
         display: contents; 
     }
 
-    /* Change the hamburger to an "X" when checked */
     .menu-toggle:checked + .hamburger-icon .bar:nth-child(1) {
         transform: rotate(45deg) translate(5px, 5px);
     }
