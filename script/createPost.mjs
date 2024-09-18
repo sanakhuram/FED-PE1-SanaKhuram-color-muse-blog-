@@ -1,11 +1,10 @@
 import { getAccessToken } from '../../script/shared/accessToken.mjs';
 import { BLOG_POSTS_ALL } from "../../script/shared/api.mjs";
-const postForm = document.querySelector('.postFormContainer'); // Form with class postFormContainer
-const postTitleInput = document.getElementById('postTitleForm'); // Post title input by ID
-const postContentInput = document.getElementById('postContentForm'); // Post content input by ID
-const imageUrlInput = document.getElementById('imageURL'); // Image URL input by ID
+const postForm = document.querySelector('.postFormContainer'); 
+const postTitleInput = document.getElementById('postTitleForm'); 
+const postContentInput = document.getElementById('postContentForm'); 
+const imageUrlInput = document.getElementById('imageURL'); 
 
-// Event listener to count characters in postContentForm
 postContentInput.addEventListener('input', () => {
     const characterCount = postContentInput.value.length;
     const counterElement = document.getElementById('counter');

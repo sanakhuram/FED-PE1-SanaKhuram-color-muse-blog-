@@ -1,5 +1,5 @@
 let currentPage = 1;
-const postsPerPage = 12; // Adjust this as per your requirement
+const postsPerPage = 12; 
 
 export function displayPaginatedPosts(posts, displayBlogPosts) {
   const postListContainer = document.querySelector(".blog-posts");
@@ -16,10 +16,9 @@ export function displayPaginatedPosts(posts, displayBlogPosts) {
       return;
     }
 
-    // Render the paginated posts
     displayBlogPosts(paginatedPosts);
 
-    // Update the pagination info
+  
     updatePaginationInfo(posts);
   }
 
@@ -43,5 +42,5 @@ export function displayPaginatedPosts(posts, displayBlogPosts) {
     }
   });
 
-  renderPosts(); // Initial render of posts
+  renderPosts(); 
 }
