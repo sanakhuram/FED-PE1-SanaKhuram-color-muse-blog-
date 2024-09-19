@@ -4,8 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Color Muse Blog - create Posts</title>
-  <meta name="description" content="Explore our colorful blog filled with vibrant inspirations and creative insights.">
+  <title>Color Muse Blog - Create Posts</title>
+  <meta name="description"
+    content="Create and share your colorful ideas on Color Muse Blog. Write, edit, and publish vibrant posts that inspire creativity and engage your audience." />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Kurale&family=La+Belle+Aurore&display=swap"
     rel="stylesheet">
@@ -15,7 +16,6 @@
   <link rel="icon" type="image/png" href="../assets/favicon-32x32.png">
   <script type="module" src="../script/shared/auth.mjs"></script>
   <script type="module" src="../script/createPost.mjs"></script>
-
 </head>
 
 <body>
@@ -55,21 +55,21 @@
     <form class="postFormContainer">
       <label for="imageURL">Image URL</label>
       <input type="text" id="imageURL" placeholder="Enter image URL" required>
-      
+
       <label for="postTitleForm">Post Title</label>
       <input type="text" id="postTitleForm" placeholder="Enter post title" maxlength="60" required>
-      
+
       <label for="postContentForm">Post Content</label>
       <textarea id="postContentForm" maxlength="10000" rows="12" placeholder="Enter post content" required></textarea>
       <p id="counter">0/10000</p>
-      
-      
+
+
       <div class="post-button">
-          <button type="submit">Create Post</button>
+        <button type="submit">Create Post</button>
       </div>
-  </form>
-  
-   
+    </form>
+
+
     <button class="deleteButtonEditPage">
       <img class="adminIcons" src="../assets/delete.png" alt="Delete this post button">
       <p>Delete Post</p>
