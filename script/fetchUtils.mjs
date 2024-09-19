@@ -18,7 +18,7 @@ export async function fetchPosts() {
     }
   }
 
-  if (currentUser) {
+  if (currentUser === 'colorMuse') {
     posts = posts.filter(post => post.author.name === currentUser);
   }
 

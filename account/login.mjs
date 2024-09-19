@@ -39,16 +39,18 @@ async function loginUser() {
     console.log(json);
 
     const newAccessToken = json.data.accessToken;
- 
+    
+
     localStorage.setItem('accessToken', newAccessToken);
     localStorage.setItem('username', name);
 
+
     updateHeader(name);
 
-    if (name.toLowerCase() === 'sana') {
-      window.location.href = '../post/manage.html';
+    if (name === 'colorMuse') {
+      window.location.href = '../post/manage.html'; 
     } else {
-      window.location.href = '../index.html';
+      window.location.href = '../index.html'; 
     }
 
   } catch (error) {

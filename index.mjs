@@ -55,16 +55,14 @@ function addSortAndSearchListeners() {
 
 function showManagePostButton() {
     const managePostContainer = document.getElementById('manage-post-btn-container');
-    const username = localStorage.getItem('username');
-
-    if (isUserSignedIn() && username && username.toLowerCase() === 'sana') {
+    const username = localStorage.getItem('username'); 
+    if (isUserSignedIn() && username === 'colorMuse') {
         const managePostButton = document.createElement('button');
         managePostButton.classList.add('manage-post-btn');
-
         managePostButton.innerHTML = '<i class="fas fa-tasks"></i> Manage Posts';
 
         managePostButton.addEventListener('click', () => {
-            window.location.href = '../post/manage.html';
+            window.location.href = '../post/manage.html'; 
         });
 
         managePostContainer.appendChild(managePostButton);
@@ -72,6 +70,7 @@ function showManagePostButton() {
         managePostContainer.style.display = 'none';
     }
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     checkLoginStatus();
