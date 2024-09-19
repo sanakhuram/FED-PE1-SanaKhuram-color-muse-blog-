@@ -1,5 +1,6 @@
 import { getAccessToken } from '../../script/shared/accessToken.mjs';
 import { BLOG_POSTS_ALL } from "../../script/shared/api.mjs";
+
 const postForm = document.querySelector('.postFormContainer'); 
 const postTitleInput = document.getElementById('postTitleForm'); 
 const postContentInput = document.getElementById('postContentForm'); 

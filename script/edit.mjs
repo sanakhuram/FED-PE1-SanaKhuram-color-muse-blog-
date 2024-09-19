@@ -7,8 +7,6 @@ import {
 const urlParams = new URLSearchParams(window.location.search);
 const postId = urlParams.get("id");
 
-console.log("Post ID:", postId);
-
 const imageURLInput = document.getElementById("imageURL");
 const postTitleInput = document.getElementById("postTitleForm");
 const postContentInput = document.getElementById("postContentForm");
@@ -23,19 +21,14 @@ async function fetchPostData(postId) {
       throw new Error("Failed to fetch post data");
     }
     const postData = await response.json();
-    console.log("Fetched Post Data:", postData);
     return postData;
   } catch (error) {
-    console.error("Error fetching post:", error);
     return null;
   }
 }
 
 async function loadPostForEditing() {
-  if (!postId) {
-    console.error("No post ID found in the URL");
-    return;
-  }
+  if (!postId) return;
 
   const post = await fetchPostData(postId);
   if (post && post.data) {
@@ -54,6 +47,7 @@ function updateCounter() {
     counterElement.textContent = `${contentLength}/10000`;
   }
 }
+
 async function handleSaveChanges(e) {
   e.preventDefault();
 
@@ -62,8 +56,6 @@ async function handleSaveChanges(e) {
     body: postContentInput?.value || "",
     media: { url: imageURLInput?.value || "" },
   };
-
-  console.log("Updated Post Data:", updatedPostData);
 
   try {
     const response = await fetch(UPDATE_BLOG_POST_BY_ID(postId), {
@@ -77,16 +69,12 @@ async function handleSaveChanges(e) {
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error(
-        `Failed to update post: ${response.status} ${response.statusText} - ${errorText}`
-      );
       alert(`Failed to update post. ${response.statusText}: ${errorText}`);
     } else {
       alert("Post updated successfully!");
       window.location.href = `../post/index.html?id=${postId}`;
     }
   } catch (error) {
-    console.error("Error updating post:", error.message);
     alert(`Error updating post: ${error.message}`);
   }
 }
@@ -113,21 +101,17 @@ async function handleDeletePost() {
     alert("Post deleted successfully!");
     window.location.href = "../index.html";
   } catch (error) {
-    console.error("Error deleting post:", error.message);
+    alert(`Error deleting post: ${error.message}`);
   }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   if (saveButton) {
     saveButton.addEventListener("click", handleSaveChanges);
-  } else {
-    console.error("Save button not found.");
   }
 
   if (deleteButton) {
     deleteButton.addEventListener("click", handleDeletePost);
-  } else {
-    console.error("Delete button not found.");
   }
 
   loadPostForEditing();
@@ -135,6 +119,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
 if (postContentInput) {
   postContentInput.addEventListener("input", updateCounter);
-} else {
-  console.error("Post content input not found.");
 }

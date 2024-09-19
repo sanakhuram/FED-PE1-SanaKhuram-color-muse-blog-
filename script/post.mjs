@@ -1,14 +1,11 @@
 import { GET_BLOG_POST_BY_ID } from './shared/api.mjs';
 import { updateHeader } from './shared/auth.mjs';
 
-
 const urlParams = new URLSearchParams(window.location.search);
-const postId = urlParams.get('id');  
-
-console.log("Extracted Post ID from URL:", postId);  
+const postId = urlParams.get('id');
 
 if (!postId) {
-    console.error('Post ID is missing from the URL'); 
+    displayPostNotFound();
 }
 
 const postTitle = document.getElementById('postHeaderTitle');
@@ -18,25 +15,20 @@ const postContent = document.getElementById('blogpost-text');
 const postCreated = document.getElementById('publicationDate');
 const postUpdated = document.getElementById('updatedTime');
 
-
 async function fetchPostById(postId) {
     try {
-        const response = await fetch(GET_BLOG_POST_BY_ID(postId));  
+        const response = await fetch(GET_BLOG_POST_BY_ID(postId));
         if (!response.ok) {
             throw new Error('Failed to fetch post');
         }
         const post = await response.json();
         return post;
     } catch (error) {
-        console.error('Error fetching post:', error);
         return null;
     }
 }
 
-
 async function loadPost() {
-    console.log("Loading post with ID:", postId);  
-
     if (!postId) {
         displayPostNotFound();
         return;
@@ -56,7 +48,6 @@ async function loadPost() {
     }
 }
 
-
 function displayPostNotFound() {
     postTitle.innerText = 'Post not found';
     postContent.innerText = 'No content available';
@@ -66,9 +57,9 @@ function displayPostNotFound() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const username = localStorage.getItem('username'); 
-    updateHeader(username);  
-    loadPost();  
+    const username = localStorage.getItem('username');
+    updateHeader(username);
+    loadPost();
 });
 
 document.getElementById("shareLink").addEventListener("click", function (e) {
@@ -81,7 +72,7 @@ document.getElementById("shareLink").addEventListener("click", function (e) {
         .then(() => {
             alert("Post URL copied to clipboard!");
         })
-        .catch((err) => {
+        .catch(() => {
             alert("Could not copy the post URL. Please try again.");
         });
 });

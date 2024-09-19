@@ -5,13 +5,10 @@ export function displayBlogPosts(posts) {
 
   if (!Array.isArray(posts) || posts.length === 0) { 
       postListContainer.innerHTML = "<p>No blog posts available. Create one to get started!</p>";
-      console.log("No blog posts found.");
       return;
   }
 
   posts.forEach((post) => {
-      console.log("Rendering post: ", post); 
-
       const postElement = document.createElement("div");
       postElement.classList.add("blog-post");
 
