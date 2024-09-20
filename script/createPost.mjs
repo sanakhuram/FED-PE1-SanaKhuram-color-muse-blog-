@@ -1,29 +1,40 @@
 import { getAccessToken } from '../../script/shared/accessToken.mjs';
 import { BLOG_POSTS_ALL } from "../../script/shared/api.mjs";
 
+// Select form elements
 const postForm = document.querySelector('.postFormContainer'); 
 const postTitleInput = document.getElementById('postTitleForm'); 
 const postContentInput = document.getElementById('postContentForm'); 
 const imageUrlInput = document.getElementById('imageURL'); 
+const imageAltTextInput = document.getElementById('imageAltText');
+const tagsInput = document.getElementById('tagsInput'); 
 
 postContentInput.addEventListener('input', () => {
     const characterCount = postContentInput.value.length;
     const counterElement = document.getElementById('counter');
     counterElement.textContent = `${characterCount}/10000`;
 });
+
+
 postForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    if (!postTitleInput.value || !postContentInput.value) {
+  
+    if (!postTitleInput.value.trim() || !postContentInput.value.trim()) {
         alert('Title and content are required!');
         return;
     }
 
+    const tagsArray = tagsInput.value.split(',').map(tag => tag.trim()).filter(tag => tag !== "");
+
     const newPost = {
-        title: postTitleInput.value,
-        body: postContentInput.value,
-        imageUrl: imageUrlInput.value,
-        media: { url: imageUrlInput.value, alt: 'Post Image' },
+        title: postTitleInput.value.trim(),
+        body: postContentInput.value.trim(),
+        media: {
+            url: imageUrlInput.value.trim(),
+            alt: imageAltTextInput.value.trim() || 'Post Image'
+        },
+        tags: tagsArray, 
     };
 
     try {
@@ -38,7 +49,11 @@ async function saveToAPI(post) {
     const blogData = {
         title: post.title,
         body: post.body,
-        media: { url: post.imageUrl, alt: 'Post Image' },
+        media: {
+            url: post.media.url,
+            alt: post.media.alt, 
+        },
+        tags: post.tags, 
     };
 
     try {
@@ -60,4 +75,3 @@ async function saveToAPI(post) {
         throw error;
     }
 }
-

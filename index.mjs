@@ -41,12 +41,20 @@ function addSortAndSearchListeners() {
         await sortAndFilterPosts(blogPosts);
         hideLoader();
     });
+
     document.getElementById('sort-filter-title').addEventListener('change', async () => {
         showLoader();
         await sortAndFilterPosts(blogPosts);
         hideLoader();
     });
+
     document.getElementById('search-bar').addEventListener('input', async () => {
+        showLoader();
+        await sortAndFilterPosts(blogPosts);
+        hideLoader();
+    });
+
+    document.getElementById('tag-filter').addEventListener('change', async () => {
         showLoader();
         await sortAndFilterPosts(blogPosts);
         hideLoader();

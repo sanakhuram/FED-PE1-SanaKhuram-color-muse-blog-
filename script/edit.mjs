@@ -8,11 +8,13 @@ const urlParams = new URLSearchParams(window.location.search);
 const postId = urlParams.get("id");
 
 const imageURLInput = document.getElementById("imageURL");
+const imageAltTextInput = document.getElementById("imageAltText"); 
 const postTitleInput = document.getElementById("postTitleForm");
 const postContentInput = document.getElementById("postContentForm");
 const deleteButton = document.querySelector(".deleteButtonEditPage");
-const saveButton = document.querySelector(".post-button button");
+const saveButton = document.querySelector("button[type='submit']"); 
 const counterElement = document.getElementById("counter");
+const tagsInput = document.getElementById('tagsInput'); 
 
 async function fetchPostData(postId) {
   try {
@@ -23,19 +25,30 @@ async function fetchPostData(postId) {
     const postData = await response.json();
     return postData;
   } catch (error) {
+    console.error("Error fetching post data:", error);
     return null;
   }
 }
 
 async function loadPostForEditing() {
-  if (!postId) return;
+  if (!postId) {
+    console.error("Post ID not found");
+    return;
+  }
 
   const post = await fetchPostData(postId);
   if (post && post.data) {
-    if (imageURLInput) imageURLInput.value = post.data.media?.url || "";
-    if (postTitleInput) postTitleInput.value = post.data.title || "";
-    if (postContentInput) postContentInput.value = post.data.body || "";
+    console.log("Loaded post:", post.data); 
+
+    imageURLInput.value = post.data.media?.url || "";
+    imageAltTextInput.value = post.data.media?.alt || ""; 
+    postTitleInput.value = post.data.title || "";
+    postContentInput.value = post.data.body || "";
+    tagsInput.value = (post.data.tags || []).join(", ");
+
     updateCounter();
+
+    postContentInput.addEventListener("input", updateCounter);
   } else {
     alert("Failed to load post data.");
   }
@@ -50,11 +63,16 @@ function updateCounter() {
 
 async function handleSaveChanges(e) {
   e.preventDefault();
-
+  
+  const tagsArray = tagsInput.value.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0);
   const updatedPostData = {
     title: postTitleInput?.value || "",
     body: postContentInput?.value || "",
-    media: { url: imageURLInput?.value || "" },
+    media: {
+      url: imageURLInput?.value || "",
+      alt: imageAltTextInput?.value || "Post Image"  
+     },
+    tags: tagsArray
   };
 
   try {
@@ -75,6 +93,7 @@ async function handleSaveChanges(e) {
       window.location.href = `../post/index.html?id=${postId}`;
     }
   } catch (error) {
+    console.error("Error updating post:", error);
     alert(`Error updating post: ${error.message}`);
   }
 }
@@ -101,6 +120,7 @@ async function handleDeletePost() {
     alert("Post deleted successfully!");
     window.location.href = "../index.html";
   } catch (error) {
+    console.error("Error deleting post:", error);
     alert(`Error deleting post: ${error.message}`);
   }
 }

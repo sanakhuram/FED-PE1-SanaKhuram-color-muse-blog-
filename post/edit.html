@@ -51,24 +51,26 @@
   <section class="welcome">
     <h1>Edit Post</h1>
   </section>
-  <form class="postFormContainer" id="postForm">
-    <label for="imageURL"> Image URL </label>
-    <input type="text" id="imageURL" placeholder="Enter image URL" />
-
-    <label for="postTitleForm"> Post Title </label>
-    <input type="text" id="postTitleForm" placeholder="Enter post title" maxlength="60" />
-
-    <label for="postContentForm"> Post Content </label>
-    <textarea id="postContentForm" maxlength="10000" rows="36" placeholder="Enter post content"></textarea>
-
+  
+  <form id="editPostForm" class="postFormContainer">
+    <label for="postTitleForm">Post Title</label>
+    <input type="text" id="postTitleForm" placeholder="Enter post title" required>
+    
+    <label for="postContentForm">Post Content</label>
+    <textarea id="postContentForm" maxlength="10000" rows="12" placeholder="Enter post content" required></textarea>
     <p id="counter">0/10000</p>
 
-    <div class="post-button">
-      <button type="submit">Save Changes</button>
-    </div>
+    <label for="imageURL">Image URL</label>
+    <input type="text" id="imageURL" placeholder="Enter image URL" required>
 
+    <label for="imageAltText">Image Alt Text</label>
+    <input type="text" id="imageAltText" placeholder="Enter image alt text" required>
 
-  </form>
+    <label for="tagsInput">Tags</label>
+    <input type="text" id="tagsInput" placeholder="Enter tags (e.g., #design, #art)" required>
+
+    <button type="submit">Save Changes</button>
+</form>
 
   <button class="deleteButtonEditPage">
     <img class="adminIcons" src="../assets/delete.png" alt="Delete this post button">
