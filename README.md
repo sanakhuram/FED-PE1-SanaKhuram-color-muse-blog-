@@ -32,7 +32,7 @@ Visitors can read blog content, while admins can log in to perform blog manageme
 
 - **Live Site**: [Color Muse Blog on Netlify](https://fed-pe1-sana-khuram-final.netlify.app/)
 - **Figma Design**: [Figma Prototype](https://www.figma.com/design/x5HWYrvYzliBv8n56oIKrj/Project-Exam-1?node-id=0-1&t=YkQnVU38o5pxEn29-1)
-- **GitHub Repository**: [GitHub Repo](your-github-link-here)
-- **Project Plan**: [Project Planning Board](your-planning-board-link-here)
+- **GitHub Repository**: [GitHub Repo](https://github.com/sanakhuram/FED-PE1-SanaKhuram-color-muse-blog-)
+- **Project Plan**: [Project Planning Board](https://github.com/users/sanakhuram/projects/3)
 
 
