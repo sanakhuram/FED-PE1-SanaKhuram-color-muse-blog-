@@ -15,8 +15,8 @@ export function sortAndFilterPosts(blogPosts) {
     if (selectedTag) {
         filteredPosts = filteredPosts.filter(post => {
             const tagsArray = Array.isArray(post.tags) 
-                ? post.tags.map(tag => tag.toLowerCase()) // If tags is an array, normalize case
-                : post.tags.split(',').map(tag => tag.trim().toLowerCase()); // If tags is a string
+                ? post.tags.map(tag => tag.toLowerCase()) 
+                : post.tags.split(',').map(tag => tag.trim().toLowerCase()); 
             return tagsArray.includes(selectedTag);
         });
     }
