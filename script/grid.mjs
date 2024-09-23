@@ -3,6 +3,7 @@ export function displayBlogPosts(posts) {
 
   postListContainer.innerHTML = ""; 
 
+ // Check if posts is an array and not empty
   if (!Array.isArray(posts) || posts.length === 0) { 
       postListContainer.innerHTML = "<p>No blog posts available. Create one to get started!</p>";
       return;
@@ -27,6 +28,7 @@ export function displayBlogPosts(posts) {
       postListContainer.appendChild(postElement);
   });
 
+// Add event listeners to each 'Read More' link
   document.querySelectorAll('.read-more').forEach(link => {
     link.addEventListener('click', function(event) {
       event.preventDefault();
@@ -42,3 +44,7 @@ export function displayBlogPosts(posts) {
     });
   });
 }
+
+
+// References 😊:
+// ChatGPT provided guidance on code readability and optimization.

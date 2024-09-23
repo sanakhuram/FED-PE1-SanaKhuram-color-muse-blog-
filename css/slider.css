@@ -82,3 +82,21 @@
       object-fit: cover;
     }
   }
+  .transparent-btn {
+    position: absolute;
+    top: 10px; 
+    right: 10px;
+    padding: 10px 20px;
+    background-color: rgba(146, 82, 184, 0.5); 
+    color: white;
+    border: none;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+  }
+
+  .transparent-btn:hover {
+    background-color: rgba(231, 22, 22, 0.486); 
+  }

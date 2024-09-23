@@ -1,6 +1,8 @@
 import { BLOG_POSTS_ALL } from './shared/api.mjs'; 
 import { isUserSignedIn } from './shared/auth.mjs'; 
 
+
+// Function to set up the carousel by fetching and displaying blog posts
 export async function setupCarousel() {
   try {
     const response = await fetch(BLOG_POSTS_ALL);
@@ -16,6 +18,8 @@ export async function setupCarousel() {
       return;
     }
 
+    // Get the latest 3 posts sorted by creation date
+    
     const latestPosts = posts.sort((a, b) => new Date(b.created) - new Date(a.created)).slice(0, 3);
 
     const carouselImage = document.querySelector(".carousel-blog-post-image");
@@ -25,6 +29,8 @@ export async function setupCarousel() {
 
     let currentIndex = 0;
 
+    // Function to update the carousel with the current post
+    
     function updateCarousel() {
       const currentPost = latestPosts[currentIndex];
 
@@ -68,3 +74,16 @@ export async function setupCarousel() {
     console.error("Error fetching posts for carousel:", error);
   }
 }
+
+// References 😊:
+// Fetch API: Handles HTTP requests in JavaScript to fetch blog posts for the carousel. 🌐
+// MDN Docs - Fetch API: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
+
+// Date Manipulation: Sorting posts by creation date. 🗓️
+// MDN Docs - Date: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
+
+// Array Methods: Array sorting and slicing for handling posts. 📚
+// MDN Docs - Array Methods: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+// Event Listeners: Adding functionality to buttons for scrolling through carousel posts. ✨
+// MDN Docs - addEventListener(): https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener

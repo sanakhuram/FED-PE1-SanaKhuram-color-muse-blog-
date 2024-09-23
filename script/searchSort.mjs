@@ -39,7 +39,7 @@ export function sortAndFilterPosts(blogPosts) {
     displayBlogPosts(filteredPosts);
 }
 
-
-
-
-
+// References 😊:
+// The idea for filtering by tags and sorting is inspired by code snippets on Stack Overflow.
+// For more, refer to the discussion: https://stackoverflow.com/questions/63155747/sort-filter-multiple-arrays
+// Guidance and structural flow provided by ChatGPT for improving code readability.

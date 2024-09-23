@@ -3,6 +3,7 @@ export function getAccessToken() {
     return localStorage.getItem('accessToken');
   }
 
+// Update the header based on user's login status
   export function updateHeader(username) {
     const authLinks = document.querySelector('.auth-links');
     
@@ -24,10 +25,14 @@ export function getAccessToken() {
   }
   
 
+// Check if the user is signed in by checking the access token
+
   export function isUserSignedIn() {
     const accessToken = getAccessToken();
     return accessToken !== null;
-  }
+}
+  
+// Sign out the user by removing their token and username
   
   export function signOut() {
     localStorage.removeItem('accessToken');
@@ -35,9 +40,11 @@ export function getAccessToken() {
     window.location.href = '../account/login.html';  
   }
   
-
+// Check if the user is logged in and update the header accordingly
   export function checkLoginStatus() {
     const username = localStorage.getItem('username');  
     updateHeader(username);  
   }
 
+// References 😊:
+// Help with structure and logic flow provided by ChatGPT

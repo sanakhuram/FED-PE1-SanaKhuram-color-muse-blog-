@@ -17,6 +17,7 @@ const saveButton = document.querySelector("button[type='submit']");
 const counterElement = document.getElementById("counter");
 const tagsInput = document.getElementById('tagsInput'); 
 
+// Fetch and handle blog post data based on the post ID from URL
 async function fetchPostData(postId) {
   try {
     const response = await fetch(GET_BLOG_POST_BY_ID(postId));
@@ -57,6 +58,7 @@ async function loadPostForEditing() {
   hideLoader();  // Hide loader after data is fetched or an error occurs
 }
 
+// Updates character counter for the post content input
 function updateCounter() {
   const contentLength = postContentInput?.value.length || 0;
   if (counterElement) {
@@ -104,6 +106,8 @@ async function handleSaveChanges(e) {
   }
 }
 
+// Handles deletion of a blog post
+
 async function handleDeletePost() {
   const confirmDelete = confirm("Are you sure you want to delete this post?");
   if (!confirmDelete) return;
@@ -150,3 +154,14 @@ document.addEventListener("DOMContentLoaded", () => {
 if (postContentInput) {
   postContentInput.addEventListener("input", updateCounter);
 }
+
+
+// References 😊:
+// 1. Fetch API - For fetching and manipulating data from the API: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API🌐
+// 2. PUT Method - For updating existing data on the server: https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT
+// 3. DELETE Method - For deleting data from the server: https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE
+// 4. Form Handling and Event Listeners - For handling form submissions and updating UI based on user input: https://developer.mozilla.org/en-US/docs/Web/API/EventListener
+// Videos 📺:
+// - [JavaScript Fetch API Crash Course](https://www.youtube.com/watch?v=cuEtnrL9-H0)
+// - [Understanding HTTP Methods](https://www.youtube.com/watch?v=vV0bZKIyxmM)
+// - ChatGPT for error handling and helping through out coding 🙏.

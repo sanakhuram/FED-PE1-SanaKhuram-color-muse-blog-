@@ -155,7 +155,9 @@ body {
 .join h2 {
     text-align: left;
 }
-
+.highlight:hover{
+    color: var(--primary-color-5);
+}
 
 /* Form Container */
 #login-form {
