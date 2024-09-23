@@ -1,7 +1,9 @@
 import { BLOG_POSTS_ALL, DELETE_POST_API_ENDPOINT } from './shared/api.mjs';
 import { updateHeader, checkLoginStatus } from './shared/auth.mjs'; 
+import { showLoader, hideLoader } from './shared/loader.mjs';  
 
 async function fetchPosts() {
+    showLoader(); 
     try {
         const response = await fetch(BLOG_POSTS_ALL); 
         if (!response.ok) {
@@ -12,6 +14,8 @@ async function fetchPosts() {
     } catch (error) {
         console.error('Error fetching posts:', error);
         return [];
+    } finally {
+        hideLoader();  
     }
 }
 
@@ -19,6 +23,7 @@ async function deletePost(postId) {
     const confirmDelete = confirm('Are you sure you want to delete this post?');
     if (!confirmDelete) return;
 
+    showLoader(); 
     try {
         const response = await fetch(DELETE_POST_API_ENDPOINT(postId), {
             method: 'DELETE',
@@ -32,10 +37,12 @@ async function deletePost(postId) {
         }
 
         alert('Post deleted successfully.');
-        window.location.reload();  
+        window.location.reload(); 
     } catch (error) {
         console.error('Error deleting post:', error);
         alert('Failed to delete post. Please try again later.');
+    } finally {
+        hideLoader();  
     }
 }
 
@@ -88,7 +95,7 @@ function renderPosts(posts) {
         button.addEventListener('click', (e) => {
             const postId = e.target.getAttribute('data-id');
             console.log('Deleting post with ID:', postId);  
-            deletePost(postId); 
+            deletePost(postId);  
         });
     });
 }
@@ -98,8 +105,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const username = localStorage.getItem('username');
     updateHeader(username);
 
-    const posts = await fetchPosts();
-    renderPosts(posts);
+    const posts = await fetchPosts();  
+    renderPosts(posts);  
 });
 
 document.querySelector('.create-post-btn').addEventListener('click', () => {

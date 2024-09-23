@@ -9,9 +9,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Kurale&family=La+Belle+Aurore&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="../css/global.css" />
-  <link rel="stylesheet" href="../css/styles.css" />
-  <link rel="stylesheet" href="../css/post.css" />
+  <link rel="stylesheet" href="./css/global.css" />
+  <link rel="stylesheet" href="./css/styles.css" />
+  <link rel="stylesheet" href="./css/post.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="icon" type="image/png" href="../assets/favicon-32x32.png" />
   <script type="module" src="../script/shared/auth.mjs"></script>
@@ -19,6 +19,7 @@
   <script type="module" src="index.mjs"></script>
 </head>
 <body>
+  <a id="top"></a>
   <header>
     <nav id="main-nav">
       <input type="checkbox" id="hamburger" class="menu-toggle">
@@ -49,7 +50,7 @@
       </a>
     </div>
   </main>
-
+  
   <section class="welcome">
     <h1>"Your Guide to Colorful Inspirations"</h1>
   </section>
@@ -109,6 +110,7 @@
   <span id="pagination-info"></span> 
   <button class="pagination-next"><i class="fas fa-chevron-right"></i></button>
 </div>
+
   <!-- Footer -->
   <footer>
     <div class="footer-content">
@@ -128,9 +130,11 @@
         <li><a href="./index.html" class="active">Home</a></li>
         <li><a href="./html/about-us.html">About</a></li>
         <li><a href="/index.html">Blog</a></li>
-        <li><a href="./account/login.html">Sign In</a></li>
       </ul>
     </div>
+    <a href="#top" id="backToTopBtn" title="back to top">
+      <img src="./assets/back-top-icon.png" alt="Back to Top" />
+    </a>
   </footer>
 </body>
 </html>

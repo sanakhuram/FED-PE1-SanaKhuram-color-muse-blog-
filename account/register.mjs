@@ -1,4 +1,5 @@
 import { REGISTER_API_ENDPOINT } from "../script/shared/api.mjs";
+import { hideLoader, showLoader } from "../script/shared/loader.mjs";
 
 document.addEventListener('DOMContentLoaded', () => {
     const registerForm = document.querySelector('#register-form');
@@ -14,12 +15,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function registerUser() {
+        showLoader();
+
         const name = registerNameInput.value;
         const email = registerEmailInput.value;
         const password = registerPasswordInput.value;
 
         if (!email.endsWith('@stud.noroff.no')) {
             alert('Please use a valid stud.noroff.no email address.');
+            hideLoader();
             return;
         }
 
@@ -51,6 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Error during registration:', error);
             alert(`Error during registration: ${error.message}`);
+        } finally {
+            hideLoader();
         }
     }
 });

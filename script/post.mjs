@@ -1,5 +1,6 @@
 import { GET_BLOG_POST_BY_ID } from './shared/api.mjs';
 import { updateHeader } from './shared/auth.mjs';
+import { showLoader, hideLoader } from './shared/loader.mjs';
 
 const urlParams = new URLSearchParams(window.location.search);
 const postId = urlParams.get('id');
@@ -29,8 +30,11 @@ async function fetchPostById(postId) {
 }
 
 async function loadPost() {
+    showLoader();
+
     if (!postId) {
         displayPostNotFound();
+        hideLoader();
         return;
     }
 
@@ -46,6 +50,7 @@ async function loadPost() {
     } else {
         displayPostNotFound();
     }
+    hideLoader();
 }
 
 function displayPostNotFound() {

@@ -52,6 +52,10 @@
     <h1>Edit Post</h1>
   </section>
   
+  <div id="loader-container" class="hidden">
+    <img id="flower-loader" src="../assets/flower-icon.png" alt="Loading Flower Icon">
+</div>
+
   <form id="editPostForm" class="postFormContainer">
     <label for="postTitleForm">Post Title</label>
     <input type="text" id="postTitleForm" placeholder="Enter post title" required>
@@ -72,10 +76,11 @@
     <button type="submit">Save Changes</button>
 </form>
 
-  <button class="deleteButtonEditPage">
-    <img class="adminIcons" src="../assets/delete.png" alt="Delete this post button">
-    <p>Delete Post</p>
-  </button>
+<button class="deleteButtonEditPage">
+  <img class="adminIcons" src="../assets/delete.png" alt="Delete this post button">
+  <span>Delete Post</span>
+</button>
+
   <!-- Footer -->
   <footer>
     <div class="footer-content">

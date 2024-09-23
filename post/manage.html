@@ -52,16 +52,17 @@
   </main>
   <section class="welcome">
     <h1> Manage All Posts </h1>
-    <button class="create-post-btn">
-      <i class="fas fa-plus-circle"></i> <!-- Font Awesome icon -->
-      <a href="../post/createPost.html">Create Post</a>
+    <div id="loader-container" class="hidden">
+      <img id="flower-loader" src="../assets/flower-icon.png" alt="Loading Flower Icon">
+  </div>
+  
+  <button class="create-post-btn" onclick="window.location.href='../post/createPost.html'">
+    <i class="fas fa-plus-circle"></i> Create Post
   </button>
   
+  
   <div class="post-grid"></div> 
-  <div class="post-buttons">
-
-
-  </section>
+  <div class="post-buttons"></div>
   <!-- Footer -->
   <footer>
     <div class="footer-content">

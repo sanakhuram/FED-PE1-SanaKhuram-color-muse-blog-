@@ -3,6 +3,7 @@ import {
   UPDATE_BLOG_POST_BY_ID,
   DELETE_POST_API_ENDPOINT,
 } from "./shared/api.mjs";
+import { showLoader, hideLoader } from './shared/loader.mjs';  
 
 const urlParams = new URLSearchParams(window.location.search);
 const postId = urlParams.get("id");
@@ -31,8 +32,10 @@ async function fetchPostData(postId) {
 }
 
 async function loadPostForEditing() {
+  showLoader();  // Show loader when fetching the post
   if (!postId) {
     console.error("Post ID not found");
+    hideLoader();  // Hide loader if no postId is found
     return;
   }
 
@@ -47,11 +50,11 @@ async function loadPostForEditing() {
     tagsInput.value = (post.data.tags || []).join(", ");
 
     updateCounter();
-
     postContentInput.addEventListener("input", updateCounter);
   } else {
     alert("Failed to load post data.");
   }
+  hideLoader();  // Hide loader after data is fetched or an error occurs
 }
 
 function updateCounter() {
@@ -63,6 +66,7 @@ function updateCounter() {
 
 async function handleSaveChanges(e) {
   e.preventDefault();
+  showLoader();  // Show loader when saving changes
   
   const tagsArray = tagsInput.value.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0);
   const updatedPostData = {
@@ -95,12 +99,16 @@ async function handleSaveChanges(e) {
   } catch (error) {
     console.error("Error updating post:", error);
     alert(`Error updating post: ${error.message}`);
+  } finally {
+    hideLoader();  // Hide loader after the operation is complete
   }
 }
 
 async function handleDeletePost() {
   const confirmDelete = confirm("Are you sure you want to delete this post?");
   if (!confirmDelete) return;
+
+  showLoader();  // Show loader when deleting the post
 
   try {
     const response = await fetch(DELETE_POST_API_ENDPOINT(postId), {
@@ -122,6 +130,8 @@ async function handleDeletePost() {
   } catch (error) {
     console.error("Error deleting post:", error);
     alert(`Error deleting post: ${error.message}`);
+  } finally {
+    hideLoader();  // Hide loader after the operation is complete
   }
 }
 

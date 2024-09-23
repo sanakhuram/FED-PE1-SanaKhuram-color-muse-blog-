@@ -1,5 +1,6 @@
 import { LOGIN_API_ENDPOINT } from "../script/shared/api.mjs";
 import { updateHeader } from "../script/shared/auth.mjs";
+import { hideLoader, showLoader } from "../script/shared/loader.mjs";
 
 const loginForm = document.querySelector('#login-form');
 const nameInput = document.querySelector('#name-input');
@@ -12,6 +13,8 @@ loginForm.addEventListener('submit', (event) => {
 });
 
 async function loginUser() {
+  showLoader();
+
   const name = nameInput.value;
   const email = emailInput.value;
   const password = passwordInput.value;
@@ -56,5 +59,7 @@ async function loginUser() {
   } catch (error) {
     console.error('Error logging in:', error);
     alert('Login failed. Please check your credentials and try again.');
+  } finally {
+    hideLoader();
   }
 }

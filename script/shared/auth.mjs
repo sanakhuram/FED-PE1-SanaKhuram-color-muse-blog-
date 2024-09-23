@@ -1,6 +1,4 @@
 // script/shared/auth.js
-
-
 export function getAccessToken() {
     return localStorage.getItem('accessToken');
   }

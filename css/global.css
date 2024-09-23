@@ -307,3 +307,30 @@ h1{
 .hidden {
     display: none;
 }
+
+#backToTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    padding: 10px;
+    z-index: 1000;
+  }
+  
+  #backToTopBtn img {
+    width: 40px;
+    height: 40px;
+    transition: transform 1s ease;
+  }
+  
+  #backToTopBtn:hover img {
+    opacity: 0.8; 
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  :target #backToTopBtn img {
+    transform: rotate(360deg);
+  }
+  
