@@ -247,6 +247,10 @@ body {
     margin: 20px auto;
     text-align: center;
 }
+.account a:hover{
+    color: var(--primary-color-5);
+    font-weight: bold;
+}
 /* Mobile Responsive */
 @media (max-width: 768px) {
     #register-form {
