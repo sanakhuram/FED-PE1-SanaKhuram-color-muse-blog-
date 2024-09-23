@@ -31,7 +31,7 @@ Visitors can read blog content, while admins can log in to perform blog manageme
 ## Login Info
 
 - **Name**: colorMuse
-- **Email**:color@stud.noroff.no 
+- **Email**: color@stud.noroff.no 
 - **Password**: colormuse 
 
 ## Links
