@@ -2,7 +2,7 @@
 
 # Color Muse Blog
 
-[Visit the live site here](https://fed-pe1-sana-khuram-final.netlify.app/)
+[Visit the live site here](https://color-muse-blog.netlify.app/)
 
 Color Muse Blog is a modern, responsive web application designed to provide users with access to dynamic and visually appealing blog posts.
 It features an intuitive interface that allows users to explore the latest posts via an interactive carousel and a clickable grid of recent posts.
@@ -28,11 +28,18 @@ Visitors can read blog content, while admins can log in to perform blog manageme
 - **CSS**: Styling and responsiveness.
 - **JavaScript**: API calls, form validation, and interactive functionality.
 
+## Login Info
+
+-**Name**: colorMuse
+-**Email**:color@stud.noroff.no 
+-**Password**: colormuse 
+
 ## Links
 
-- **Live Site**: [Color Muse Blog on Netlify](https://fed-pe1-sana-khuram-final.netlify.app/)
+- **Live Site**: [Color Muse Blog on Netlify](https://color-muse-blog.netlify.app/)
 - **Figma Design**: [Figma Prototype](https://www.figma.com/design/x5HWYrvYzliBv8n56oIKrj/Project-Exam-1?node-id=0-1&t=YkQnVU38o5pxEn29-1)
 - **GitHub Repository**: [GitHub Repo](https://github.com/sanakhuram/FED-PE1-SanaKhuram-color-muse-blog-)
 - **Project Plan**: [Project Planning Board](https://github.com/users/sanakhuram/projects/3)
+
 
 
