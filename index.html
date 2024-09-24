@@ -25,7 +25,7 @@
       <input type="checkbox" id="hamburger" class="menu-toggle">
 
       <!-- Hamburger menu icon for mobile -->
-      <label for="hamburger" class="hamburger-icon">
+      <label for="hamburger" class="hamburger-icon"  aria-label="Menu bars">
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
@@ -60,7 +60,7 @@
 </div>
 
 <div class="carousel">
-  <button class="scroll-left"><i class="fas fa-chevron-left"></i></button>
+  <button class="scroll-left"  aria-label="Scroll left"><i class="fas fa-chevron-left"></i></button>
   
   <div class="carousel-blog-post">
     <div class="image-container">
@@ -69,22 +69,23 @@
     </div>
   </div>
   
-  <button class="scroll-right"><i class="fas fa-chevron-right"></i></button>
+  <button class="scroll-right"  aria-label="Scroll right"><i class="fas fa-chevron-right"></i></button>
 </div>
 
 <div class="blog-posts-container">
   <h2 class="blog-post-heading">Blog Posts</h2>
   <div class="sorting">
-    <select id="sort-filter">
+    <select id="sort-filter" aria-label="Sort by date">
       <option value="latest">Latest</option>
       <option value="oldest">Oldest</option>
     </select>
   
-    <select id="sort-filter-title">
+    <select id="sort-filter-title" aria-label="Sort by title">
       <option value="title-asc">Title (A-Z)</option>
       <option value="title-desc">Title (Z-A)</option>
     </select>
-    <select id="tag-filter">
+  
+    <select id="tag-filter" aria-label="Filter by tag">
       <option value="">All Tags</option>
       <option value="interior">Interior</option>
       <option value="art">Art</option>
@@ -92,12 +93,13 @@
       <option value="color">Color</option>
       <option value="design">Design</option>
     </select>
-    
+  
     <div id="search">
-      <input type="text" id="search-bar" placeholder="Search by title..." />
-      <i class="fa-solid fa-magnifying-glass"></i> 
+      <input type="text" id="search-bar" placeholder="Search by title..." aria-label="Search by title" />
+      <i class="fa-solid fa-magnifying-glass"></i>
     </div>
   </div>
+  
   
 
   <div id="manage-post-btn-container"></div>
@@ -106,9 +108,9 @@
 <div id="blog-post-display"></div>
 </div>
 <div class="pagination">
-  <button class="pagination-previous"><i class="fas fa-chevron-left"></i></button>
+  <button class="pagination-previous"  aria-label="previous page"><i class="fas fa-chevron-left"></i></button>
   <span id="pagination-info"></span> 
-  <button class="pagination-next"><i class="fas fa-chevron-right"></i></button>
+  <button class="pagination-next"  aria-label="Next page"><i class="fas fa-chevron-right"></i></button>
 </div>
 
   <!-- Footer -->
