@@ -313,6 +313,8 @@ button:hover {
     overflow: hidden;
     text-align: center;
     box-shadow: 0 4px 10px var(--primary-color-4);
+    transition: transform 0.3s ease;
+    cursor:pointer;
 }
 
 
@@ -321,6 +323,10 @@ button:hover {
     width: 100%;
     height: auto;
     border-radius: 10px;
+    
+}
+.carousel-blog-post:hover {
+    transform: translateY(-10px);
 }
 
 #carousel-title {

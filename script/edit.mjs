@@ -33,10 +33,10 @@ async function fetchPostData(postId) {
 }
 
 async function loadPostForEditing() {
-  showLoader();  // Show loader when fetching the post
+  showLoader();  
   if (!postId) {
     console.error("Post ID not found");
-    hideLoader();  // Hide loader if no postId is found
+    hideLoader();  
     return;
   }
 
@@ -55,7 +55,7 @@ async function loadPostForEditing() {
   } else {
     alert("Failed to load post data.");
   }
-  hideLoader();  // Hide loader after data is fetched or an error occurs
+  hideLoader();  
 }
 
 // Updates character counter for the post content input
@@ -102,7 +102,7 @@ async function handleSaveChanges(e) {
     console.error("Error updating post:", error);
     alert(`Error updating post: ${error.message}`);
   } finally {
-    hideLoader();  // Hide loader after the operation is complete
+    hideLoader();  
   }
 }
 
@@ -135,7 +135,7 @@ async function handleDeletePost() {
     console.error("Error deleting post:", error);
     alert(`Error deleting post: ${error.message}`);
   } finally {
-    hideLoader();  // Hide loader after the operation is complete
+    hideLoader();  
   }
 }
 
