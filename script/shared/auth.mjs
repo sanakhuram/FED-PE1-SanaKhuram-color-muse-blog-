@@ -1,50 +1,49 @@
-// script/shared/auth.js
+// Get the access token from localStorage
 export function getAccessToken() {
-    return localStorage.getItem('accessToken');
-  }
+  return localStorage.getItem('accessToken');
+}
 
-// Update the header based on user's login status
-  export function updateHeader(username) {
-    const authLinks = document.querySelector('.auth-links');
-    
-    if (authLinks) {
-   
-      if (username) {
-        authLinks.innerHTML = `<span>Hi, ${username}</span> <button id="sign-out-button">Sign Out</button>`;
-      } else {
-   
-        authLinks.innerHTML = `<a href="../account/login.html">Sign In</a> | <a href="../account/register.html">Register</a>`;
-      }
-  
+// Update the header based on the user's login status
+export function updateHeader(username) {
+  const authLinks = document.querySelector('.auth-links'); 
 
-      const signOutButton = document.querySelector('#sign-out-button');
-      if (signOutButton) {
-        signOutButton.addEventListener('click', signOut);
-      }
+  if (authLinks) {
+    // If the user is logged in, show username and sign-out button
+    if (username) {
+      authLinks.innerHTML = `<span>Hi, ${username}</span> <button id="sign-out-button">Sign Out</button>`;
+    } else {
+      // Otherwise, show the sign-in and register links
+      authLinks.innerHTML = `<a href="../account/login.html">Sign In</a> | <a href="../account/register.html">Register</a>`;
+    }
+
+    // Add an event listener to the sign-out button if it exists
+    const signOutButton = document.querySelector('#sign-out-button');
+    if (signOutButton) {
+      signOutButton.addEventListener('click', signOut);
     }
   }
-  
-
-// Check if the user is signed in by checking the access token
-
-  export function isUserSignedIn() {
-    const accessToken = getAccessToken();
-    return accessToken !== null;
 }
-  
-// Sign out the user by removing their token and username
-  
-  export function signOut() {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('username');  
-    window.location.href = '../account/login.html';  
-  }
-  
-// Check if the user is logged in and update the header accordingly
-  export function checkLoginStatus() {
-    const username = localStorage.getItem('username');  
-    updateHeader(username);  
-  }
 
-// References 😊:
-// Help with structure and logic flow provided by ChatGPT
+// Check if the user is signed in
+export function isUserSignedIn() {
+  const accessToken = getAccessToken();
+  return accessToken !== null;
+}
+
+// Sign out the user 
+export function signOut() {
+  localStorage.removeItem('accessToken');
+  localStorage.removeItem('username');
+  window.location.href = '../account/login.html'; 
+}
+
+// Check login status and update the header when the page loads
+export function checkLoginStatus() {
+  const username = localStorage.getItem('username'); 
+  updateHeader(username);
+}
+
+// Call checkLoginStatus() on page load
+document.addEventListener('DOMContentLoaded', () => {
+  checkLoginStatus(); 
+});
