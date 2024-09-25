@@ -21,8 +21,13 @@ The project integrates with a blogging API to manage and display posts dynamical
 
 ### User Roles and Permissions
 
-- **Owner/Admin**: After logging in, the admin user (owner) can manage all blog posts by creating, editing, or deleting them. This ensures full control over the blog's content.
-- **Regular Users**: Regular users can view and share posts. However, they cannot create, edit, or delete any blog content, even after registering or logging in, keeping content management restricted to the blog owner.
+- **Owner/Admin**: After logging in, the admin user (owner) can manage all blog posts by creating, reading , updating or deleting them. This ensures full control over the blog's content.
+
+- **Regular User (Before Signing In)**:
+For users who are unregistered or not signed in, their access is limited to viewing blog posts. They cannot perform any additional actions such as reading or sharing the content.
+
+- **Regular User (After Registering and Signing In)**:
+Once a regular user registers and logs in, they gain the ability to read and share posts. However, they are still restricted from creating, editing, or deleting any posts.
 
 ## Technologies Used
 
@@ -30,7 +35,7 @@ The project integrates with a blogging API to manage and display posts dynamical
 - **CSS**: Styling and responsiveness.
 - **JavaScript**: API calls, form validation, and interactive functionality.
 
-## Login Info
+## Admin Login Info
 
 - **Name**: colorMuse
 - **Email**: color@stud.noroff.no 
