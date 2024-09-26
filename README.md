@@ -49,7 +49,7 @@ The goal of this project is to implement the skills acquired during the **Fronte
 - **Email**: color@stud.noroff.no 
 - **Password**: colormuse
 
-## Links
+## Links 🔗
 
 - **Live Site**: [Color Muse Blog on Netlify](https://color-muse-blog-project-exam-1.netlify.app/)
 - **Figma Design**: [Figma Prototype](https://www.figma.com/design/x5HWYrvYzliBv8n56oIKrj/Project-Exam-1?node-id=0-1&t=YkQnVU38o5pxEn29-1)
