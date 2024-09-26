@@ -51,7 +51,7 @@ The goal of this project is to implement the skills acquired during the **Fronte
 
 ## Links
 
-- **Live Site**: [Color Muse Blog on Netlify](https://color-muse-blog.netlify.app/)
+- **Live Site**: [Color Muse Blog on Netlify](https://color-muse-blog-project-exam-1.netlify.app/)
 - **Figma Design**: [Figma Prototype](https://www.figma.com/design/x5HWYrvYzliBv8n56oIKrj/Project-Exam-1?node-id=0-1&t=YkQnVU38o5pxEn29-1)
 - **GitHub Repository**: [GitHub Repo](https://github.com/sanakhuram/FED-PE1-SanaKhuram-color-muse-blog-)
 - **Project Plan**: [Project Planning Board](https://github.com/users/sanakhuram/projects/3)
