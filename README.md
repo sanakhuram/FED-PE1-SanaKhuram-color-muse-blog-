@@ -75,10 +75,12 @@ The goal of this project is to implement the skills acquired during the **Fronte
 - **Date Formatting**: Formatting post dates: [MDN Docs - toLocaleDateString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)
 - **Array Methods**: Sorting and slicing: [MDN Docs - Array Methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
 - **Pagination Logic**: For future implementation: [Sitepoint JavaScript Pagination](https://www.sitepoint.com/pagination-javascript)
+- **Blog Reads**: [How to Build a Blog](https://medium.com/@faizanmumtazwork/how-to-building-a-blog-in-js-node-ejs-and-html-css-as-a-beginner-d7b130d9f5c4) [Medium]
+
 
 ### Videos and External Resources
 - **JavaScript Fetch API Crash Course**: [YouTube Video](https://www.youtube.com/watch?v=cuEtnrL9-H0)
-- **Understanding HTTP Methods**: [YouTube Video](https://www.youtube.com/watch?v=vV0bZKIyxmM)
+- **HOw To Create A Working Blog**: [YouTube Video](https://www.youtube.com/watch?v=EK_emZ1_DGo)
 
 ## Exam Information
 
