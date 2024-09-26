@@ -5,7 +5,8 @@
 
 ![Project Overview](https://i.postimg.cc/4NMFDNpV/project.jpg)
 
-[Visit the live site here](https://color-muse-blog.netlify.app/)
+
+[Visit the live site here](https://color-muse-blog-project-exam-1.netlify.app/)
 
 ## Project Description
 
