@@ -36,12 +36,22 @@ The goal of this project is to implement the skills acquired during the **Fronte
 - **Manage blog posts** (Create, Read, Update, Delete) after logging in.
 - **Post editing** and **deletion** available only to logged-in admins.
 
-## Technologies Used
+## Technologies Used ⚙️
 
 - **HTML**: Structure of the application.
 - **CSS**: Styling and responsiveness.
-- **JavaScript**: API calls, form validation, and interactive functionality.
+- **JavaScript (Vanilla)**: API calls, form validation, and interactive functionality.
 - **API Integration**: RESTful API methods for post management (GET, POST, PUT, DELETE).
+
+## Installation & Setup
+
+
+- **Clone the repository**:
+   Open VS Code terminal or your preferred terminal and run:
+
+   ```bash
+   git clone https://github.com/sanakhuram/FED-PE1-SanaKhuram-color-muse-blog-.git
+
 
 ## Links 🔗
 
@@ -52,7 +62,7 @@ The goal of this project is to implement the skills acquired during the **Fronte
 
 ## References 😊
 
-### Code and Tutorials
+### Code and Tutorials 👩🏻‍💻
 - **Udemy ZTM JavaScript Course**: [Udemy ZTM JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)
 - **YouTube Fetch API Tutorial**: [Fetch API Crash Course](https://www.youtube.com/watch?v=cuEtnrL9-H0)
 - **StackOverflow Snippets**: Sorting and filtering: [StackOverflow Discussion](https://stackoverflow.com/questions/63155747/sort-filter-multiple-arrays)
@@ -72,11 +82,11 @@ The goal of this project is to implement the skills acquired during the **Fronte
 - **Blog Reads**: [How to Build a Blog](https://medium.com/@faizanmumtazwork/how-to-building-a-blog-in-js-node-ejs-and-html-css-as-a-beginner-d7b130d9f5c4) [Medium]
 
 
-### Videos and External Resources
+### Videos and External Resources 📺
 - **JavaScript Fetch API Crash Course**: [YouTube Video](https://www.youtube.com/watch?v=cuEtnrL9-H0)
 - **HOw To Create A Working Blog**: [YouTube Video](https://www.youtube.com/watch?v=EK_emZ1_DGo)
 
-## Exam Information
+## Exam Information 
 
 This project adheres to the brief provided for the **FED1 Frontend Development Exam**. The exam assesses skills in **planning**, **designing**, and **building** responsive web applications using HTML, CSS, and JavaScript.
 
