@@ -43,12 +43,6 @@ The goal of this project is to implement the skills acquired during the **Fronte
 - **JavaScript**: API calls, form validation, and interactive functionality.
 - **API Integration**: RESTful API methods for post management (GET, POST, PUT, DELETE).
 
-## Admin Login Information
-
-- **Name**: colorMuse
-- **Email**: color@stud.noroff.no 
-- **Password**: colormuse
-
 ## Links 🔗
 
 - **Live Site**: [Color Muse Blog on Netlify](https://color-muse-blog-project-exam-1.netlify.app/)
