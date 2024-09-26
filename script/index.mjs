@@ -1,42 +1,58 @@
 import { BLOG_POSTS_ALL } from "./shared/api.mjs";
 import { displayBlogPosts } from "./grid.mjs";
 import { setupCarousel } from "./carousel.mjs";
-import { isUserSignedIn, updateHeader, checkLoginStatus } from "./shared/auth.mjs";
-import { sortAndFilterPosts } from './searchSort.mjs';
+import { isUserSignedIn, checkLoginStatus } from "./shared/auth.mjs";
 import { displayPaginatedPosts } from './pagination.mjs'; 
 import { showLoader, hideLoader } from "./shared/loader.mjs";
+import { sortAndFilterPosts } from './searchSort.mjs';
 
 let blogPosts = [];
-
-// Fetch all the blog posts from API
 
 async function getAllBlogPosts() {
     try {
         const response = await fetch(BLOG_POSTS_ALL);
         if (!response.ok) {
-            return [];
+            throw new Error('Error fetching blog posts');
         }
         const json = await response.json();
-        return json;
+        return json.data;
     } catch (error) {
+        console.error('Error fetching posts:', error);
         return [];
     }
 }
-// Main function to load data and setup the page
+
+function loadPostsFromLocalStorage() {
+    const username = localStorage.getItem('username');
+    if (!username) return [];
+    return JSON.parse(localStorage.getItem(`posts_${username}`)) || [];
+}
+
 async function main() {
     showLoader();
-    const blogResponse = await getAllBlogPosts();
-    blogPosts = Array.isArray(blogResponse.data) ? blogResponse.data : [];
 
-    if (blogPosts.length > 0) {
-        displayPaginatedPosts(blogPosts, displayBlogPosts); 
-        const lastThreePosts = blogPosts.slice(0, 3);
+    const username = localStorage.getItem('username');
+    let filteredPosts = [];
+
+    if (!isUserSignedIn() || username === 'colorMuse') {
+        blogPosts = await getAllBlogPosts();
+        filteredPosts = blogPosts;
+    } else {
+        const localPosts = loadPostsFromLocalStorage();
+        filteredPosts = localPosts.filter(post => post.author === username);
+    }
+
+    if (filteredPosts.length > 0) {
+        displayPaginatedPosts(filteredPosts, displayBlogPosts);
+        const lastThreePosts = filteredPosts.slice(0, 3);
         setupCarousel(lastThreePosts);
         addSortAndSearchListeners();
+    } else {
+        document.querySelector(".blog-posts").innerHTML = "<p>No blog posts yet click on Manage Posts to get started😊.</p>";
     }
+
     hideLoader();
 }
-// Add listeners for sorting, searching, and filtering blog posts
 
 function addSortAndSearchListeners() {
     document.getElementById('sort-filter').addEventListener('change', async () => {
@@ -63,11 +79,12 @@ function addSortAndSearchListeners() {
         hideLoader();
     });
 }
-// Show "Manage Posts" button only for signed-in admin
+
 function showManagePostButton() {
     const managePostContainer = document.getElementById('manage-post-btn-container');
     const username = localStorage.getItem('username'); 
-    if (isUserSignedIn() && username === 'colorMuse') {
+
+    if (isUserSignedIn()) {
         const managePostButton = document.createElement('button');
         managePostButton.classList.add('manage-post-btn');
         managePostButton.innerHTML = '<i class="fas fa-tasks"></i> Manage Posts';
@@ -82,16 +99,9 @@ function showManagePostButton() {
     }
 }
 
-// When the DOM is fully loaded, initialize functions
 document.addEventListener('DOMContentLoaded', () => {
     checkLoginStatus();
-    main(); 
+    main();
     showManagePostButton();
 });
 
-
-// References 😊:
-// - code inspired by the tutorials on JavaScript and working with APIs, check out:
-// - [Udemy ZTM JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)
-// - [YouTube Tutorial on Fetch API](https://www.youtube.com/watch?v=cuEtnrL9-H0)
-// -  Guidance and suggestions provided by ChatGPT for improving code readability and structure.

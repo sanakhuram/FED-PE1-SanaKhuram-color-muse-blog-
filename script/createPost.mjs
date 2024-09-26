@@ -1,7 +1,6 @@
-import { getAccessToken } from '../../script/shared/accessToken.mjs';
-import { BLOG_POSTS_ALL } from "../../script/shared/api.mjs";
+import { getAccessToken } from './shared/accessToken.mjs';
+import { BLOG_POSTS_ALL } from './shared/api.mjs';
 
-// Select form elements ✍️
 const postForm = document.querySelector('.postFormContainer'); 
 const postTitleInput = document.getElementById('postTitleForm'); 
 const postContentInput = document.getElementById('postContentForm'); 
@@ -9,14 +8,11 @@ const imageUrlInput = document.getElementById('imageURL');
 const imageAltTextInput = document.getElementById('imageAltText');
 const tagsInput = document.getElementById('tagsInput'); 
 
-// Update character counter 📏
 postContentInput.addEventListener('input', () => {
     const characterCount = postContentInput.value.length;
     const counterElement = document.getElementById('counter');
     counterElement.textContent = `${characterCount}/10000`;
 });
-
-// Handle form submission 📝
 postForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
@@ -28,66 +24,85 @@ postForm.addEventListener('submit', async (event) => {
     const tagsArray = tagsInput.value.split(',').map(tag => tag.trim()).filter(tag => tag !== "");
 
     const newPost = {
+        id: Date.now(),  
         title: postTitleInput.value.trim(),
         body: postContentInput.value.trim(),
         media: {
             url: imageUrlInput.value.trim(),
             alt: imageAltTextInput.value.trim() || 'Post Image'
         },
-        tags: tagsArray, 
+        tags: tagsArray,
+        author: localStorage.getItem('username') || 'Anonymous',  
     };
 
     try {
-        await saveToAPI(newPost); // Save the post to the API 📡
-        window.location.href = '../index.html'; // Redirect to homepage 🏡
+        if (newPost.author === 'colorMuse') {
+            await saveToAPI(newPost);
+        } else {
+            saveToLocalStorage(newPost);
+        }
+        window.location.href = '../index.html'; 
     } catch (error) {
-        alert('Failed to save the post to the server. Please try again later. 😞');
+        alert('Failed to save the post. Please try again later.');
     }
 });
 
-// Function to save the post to the API 🌐
 async function saveToAPI(post) {
+    const accessToken = getAccessToken();
+
+    if (!accessToken) {
+        throw new Error("User not authenticated");
+    }
+
     const blogData = {
         title: post.title,
         body: post.body,
         media: {
             url: post.media.url,
-            alt: post.media.alt, 
+            alt: post.media.alt,
         },
-        tags: post.tags, 
+        tags: post.tags,
     };
 
-    try {
-        const accessToken = getAccessToken(); // Get access token 🔑
-        const options = {
-            method: 'POST', // HTTP POST request ✉️
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${accessToken}`,
-            },
-            body: JSON.stringify(blogData),
-        };
-        const response = await fetch(BLOG_POSTS_ALL, options); // Send request to API 🚀
-        if (!response.ok) {
-            throw new Error('Failed to save post to the API');
-        }
-    } catch (error) {
-        console.error('Error saving post to API:', error); // Log the error ⚠️
-        throw error;
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(blogData),
+    };
+
+    const response = await fetch(BLOG_POSTS_ALL, options);
+    if (!response.ok) {
+        throw new Error('Failed to save post to the API');
     }
 }
 
+function saveToLocalStorage(post) {
+    const username = localStorage.getItem('username');
+    const postsKey = `posts_${username}`; 
+    let posts = JSON.parse(localStorage.getItem(postsKey)) || [];
+    posts.push(post);
+    localStorage.setItem(postsKey, JSON.stringify(posts));
 
-// References 😊:
-// Fetch API: Handles HTTP requests in JavaScript. 🌐
-// MDN Docs - Fetch API: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
+    console.log("Posts saved in LocalStorage:", posts); 
+}
 
-// Form Handling: Manages form submissions and validation. ✍️
-// MDN Docs - Form Data: https://developer.mozilla.org/en-US/docs/Web/API/FormData
+function loadPostsFromLocalStorage() {
+    return JSON.parse(localStorage.getItem('posts')) || [];
+}
 
-// Local Storage: Stores and retrieves data in the browser. 🗃️
-// MDN Docs - Local Storage: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+function deletePostFromLocalStorage(postId) {
+    let posts = loadPostsFromLocalStorage();
+    posts = posts.filter(post => post.id !== postId);
+    localStorage.setItem('posts', JSON.stringify(posts));
+}
 
-// Async/Await: Handles asynchronous operations in JavaScript. ⏳
-// MDN Docs - Async/Await: https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await
-// ChatGPT - For error handling and helping in overall coding ❤️
+postContentInput.addEventListener('input', () => {
+    const characterCount = postContentInput.value.length;
+    const counterElement = document.getElementById('counter');
+    counterElement.textContent = `${characterCount}/10000`;
+});
+
+

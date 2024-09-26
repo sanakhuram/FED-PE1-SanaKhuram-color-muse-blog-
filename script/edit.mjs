@@ -19,16 +19,25 @@ const tagsInput = document.getElementById('tagsInput');
 
 // Fetch and handle blog post data based on the post ID from URL
 async function fetchPostData(postId) {
-  try {
-    const response = await fetch(GET_BLOG_POST_BY_ID(postId));
-    if (!response.ok) {
-      throw new Error("Failed to fetch post data");
+  const username = localStorage.getItem('username');
+
+  if (username === 'colorMuse') {
+    // Fetch from API if user is `colorMuse`
+    try {
+      const response = await fetch(GET_BLOG_POST_BY_ID(postId));
+      if (!response.ok) {
+        throw new Error("Failed to fetch post data from API");
+      }
+      const postData = await response.json();
+      return postData.data;
+    } catch (error) {
+      console.error("Error fetching post data from API:", error);
+      return null;
     }
-    const postData = await response.json();
-    return postData;
-  } catch (error) {
-    console.error("Error fetching post data:", error);
-    return null;
+  } else {
+    // Fetch from local storage for regular users
+    const posts = JSON.parse(localStorage.getItem(`posts_${username}`)) || [];
+    return posts.find(post => post.id === parseInt(postId));
   }
 }
 
@@ -41,14 +50,12 @@ async function loadPostForEditing() {
   }
 
   const post = await fetchPostData(postId);
-  if (post && post.data) {
-    console.log("Loaded post:", post.data); 
-
-    imageURLInput.value = post.data.media?.url || "";
-    imageAltTextInput.value = post.data.media?.alt || ""; 
-    postTitleInput.value = post.data.title || "";
-    postContentInput.value = post.data.body || "";
-    tagsInput.value = (post.data.tags || []).join(", ");
+  if (post) {
+    imageURLInput.value = post.media?.url || "";
+    imageAltTextInput.value = post.media?.alt || ""; 
+    postTitleInput.value = post.title || "";
+    postContentInput.value = post.body || "";
+    tagsInput.value = (post.tags || []).join(", ");
 
     updateCounter();
     postContentInput.addEventListener("input", updateCounter);
@@ -66,37 +73,50 @@ function updateCounter() {
   }
 }
 
+// Save changes (API for admin, localStorage for regular users)
 async function handleSaveChanges(e) {
   e.preventDefault();
-  showLoader();  // Show loader when saving changes
-  
+  showLoader();  
+
+  const username = localStorage.getItem('username');
   const tagsArray = tagsInput.value.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0);
   const updatedPostData = {
+    id: postId, 
     title: postTitleInput?.value || "",
     body: postContentInput?.value || "",
     media: {
       url: imageURLInput?.value || "",
       alt: imageAltTextInput?.value || "Post Image"  
-     },
+    },
     tags: tagsArray
   };
 
   try {
-    const response = await fetch(UPDATE_BLOG_POST_BY_ID(postId), {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-      body: JSON.stringify(updatedPostData),
-    });
+    if (username === 'colorMuse') {
+      // Admin: Update post via API
+      const response = await fetch(UPDATE_BLOG_POST_BY_ID(postId), {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify(updatedPostData),
+      });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      alert(`Failed to update post. ${response.statusText}: ${errorText}`);
+      if (!response.ok) {
+        const errorText = await response.text();
+        alert(`Failed to update post. ${response.statusText}: ${errorText}`);
+      } else {
+        alert("Post updated successfully!");
+        window.location.href = `../post/index.html?id=${postId}`;
+      }
     } else {
+      // Regular User: Update post in localStorage
+      let posts = JSON.parse(localStorage.getItem(`posts_${username}`)) || [];
+      posts = posts.map(post => post.id === parseInt(postId) ? updatedPostData : post);
+      localStorage.setItem(`posts_${username}`, JSON.stringify(posts));
       alert("Post updated successfully!");
-      window.location.href = `../post/index.html?id=${postId}`;
+      window.location.href = '../index.html';  
     }
   } catch (error) {
     console.error("Error updating post:", error);
@@ -112,25 +132,37 @@ async function handleDeletePost() {
   const confirmDelete = confirm("Are you sure you want to delete this post?");
   if (!confirmDelete) return;
 
-  showLoader();  // Show loader when deleting the post
+  const username = localStorage.getItem('username');
+
+  showLoader();  
 
   try {
-    const response = await fetch(DELETE_POST_API_ENDPOINT(postId), {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    });
+    if (username === 'colorMuse') {
+      // Admin: Delete via API
+      const response = await fetch(DELETE_POST_API_ENDPOINT(postId), {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(
-        `Failed to delete post: ${response.status} ${response.statusText} - ${errorText}`
-      );
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(
+          `Failed to delete post: ${response.status} ${response.statusText} - ${errorText}`
+        );
+      }
+
+      alert("Post deleted successfully!");
+      window.location.href = "../index.html";
+    } else {
+      // Regular User: Delete from localStorage
+      let posts = JSON.parse(localStorage.getItem(`posts_${username}`)) || [];
+      posts = posts.filter(post => post.id !== parseInt(postId));
+      localStorage.setItem(`posts_${username}`, JSON.stringify(posts));
+      alert("Post deleted successfully!");
+      window.location.href = '../index.html';  
     }
-
-    alert("Post deleted successfully!");
-    window.location.href = "../index.html";
   } catch (error) {
     console.error("Error deleting post:", error);
     alert(`Error deleting post: ${error.message}`);
@@ -155,13 +187,3 @@ if (postContentInput) {
   postContentInput.addEventListener("input", updateCounter);
 }
 
-
-// References 😊:
-// 1. Fetch API - For fetching and manipulating data from the API: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API🌐
-// 2. PUT Method - For updating existing data on the server: https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT
-// 3. DELETE Method - For deleting data from the server: https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE
-// 4. Form Handling and Event Listeners - For handling form submissions and updating UI based on user input: https://developer.mozilla.org/en-US/docs/Web/API/EventListener
-// Videos 📺:
-// - [JavaScript Fetch API Crash Course](https://www.youtube.com/watch?v=cuEtnrL9-H0)
-// - [Understanding HTTP Methods](https://www.youtube.com/watch?v=vV0bZKIyxmM)
-// - ChatGPT for error handling and helping through out coding 🙏.

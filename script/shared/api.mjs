@@ -15,3 +15,5 @@ export const UPDATE_BLOG_POST_BY_ID = (postId) =>
 
 export const DELETE_POST_API_ENDPOINT = (postId) =>
   `${BASE_API_URL}/blog/posts/${REGISTER_BLOG_NAME}/${postId}`;
+
+

@@ -49,15 +49,3 @@ export function displayPaginatedPosts(posts, displayBlogPosts) {
   renderPosts(); 
 }
 
-// References 😊:
-
-// Event Listeners: Attaches event handlers to DOM elements like buttons. 🔗
-// MDN Web Docs - addEventListener(): https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
-
-// Array slice(): Extracts a portion of an array into a new array. 📚
-// MDN Web Docs - Array.prototype.slice(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
-
-// Pagination Logic: General resource on implementing pagination. 📝
-// JavaScript Pagination: https://www.sitepoint.com/pagination-javascript
-
-// - ChatGPT for error handling and helping through out coding.

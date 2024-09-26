@@ -1,74 +1,89 @@
-import { BLOG_POSTS_ALL, DELETE_POST_API_ENDPOINT } from './shared/api.mjs';
-import { updateHeader, checkLoginStatus } from './shared/auth.mjs'; 
-import { showLoader, hideLoader } from './shared/loader.mjs';  
+import { BLOG_POSTS_ALL, DELETE_POST_API_ENDPOINT } from "./shared/api.mjs";
+import { checkLoginStatus, isUserSignedIn } from "./shared/auth.mjs";
+import { showLoader, hideLoader } from "./shared/loader.mjs";
 
-//Fetch all blog posts
-
-async function fetchPosts() {
-    showLoader(); 
-    try {
-        const response = await fetch(BLOG_POSTS_ALL); 
-        if (!response.ok) {
-            throw new Error('Error fetching posts.');
-        }
-        const posts = await response.json();
-        return posts.data; 
-    } catch (error) {
-        console.error('Error fetching posts:', error);
-        return [];
-    } finally {
-        hideLoader();  
+// Fetch all blog posts from API (for `colorMuse`)
+async function fetchPostsFromAPI() {
+  showLoader();
+  try {
+    const response = await fetch(BLOG_POSTS_ALL);
+    if (!response.ok) {
+      throw new Error("Error fetching posts.");
     }
+    const posts = await response.json();
+    return posts.data;
+  } catch (error) {
+    console.error("Error fetching posts from API:", error);
+    return [];
+  } finally {
+    hideLoader();
+  }
 }
 
-//Function Delete post by ID
+function fetchPostsFromLocalStorage() {
+  const username = localStorage.getItem("username");
+  return JSON.parse(localStorage.getItem(`posts_${username}`)) || [];
+}
 
+function deletePostFromLocalStorage(postId) {
+  const username = localStorage.getItem("username");
+  let posts = fetchPostsFromLocalStorage();
+  posts = posts.filter((post) => post.id !== postId);
+  localStorage.setItem(`posts_${username}`, JSON.stringify(posts));
+  alert("Post deleted successfully.");
+  window.location.reload();
+}
 async function deletePost(postId) {
-    const confirmDelete = confirm('Are you sure you want to delete this post?');
-    if (!confirmDelete) return;
+  const username = localStorage.getItem("username");
+  const confirmDelete = confirm("Are you sure you want to delete this post?");
+  if (!confirmDelete) return;
 
-    showLoader(); 
+  showLoader();
+
+  if (username === "colorMuse") {
     try {
-        const response = await fetch(DELETE_POST_API_ENDPOINT(postId), {
-            method: 'DELETE',
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`, 
-            },
-        });
+      const response = await fetch(DELETE_POST_API_ENDPOINT(postId), {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
 
-        if (!response.ok) {
-            throw new Error('Failed to delete post.');
-        }
+      if (!response.ok) {
+        throw new Error("Failed to delete post from API.");
+      }
 
-        alert('Post deleted successfully.');
-        window.location.reload(); 
-    } catch (error) {
-        console.error('Error deleting post:', error);
-        alert('Failed to delete post. Please try again later.');
+      alert("Post deleted successfully.");
+      window.location.reload();
+      console.error("Error deleting post from API:", error);
+      alert("Failed to delete post. Please try again later.");
     } finally {
-        hideLoader();  
+      hideLoader();
     }
+  } else {
+    deletePostFromLocalStorage(postId);
+    hideLoader();
+  }
 }
-
-//Function to Render blog posts in grid
-
 function renderPosts(posts) {
-    const postsContainer = document.querySelector('.post-grid'); 
-    postsContainer.innerHTML = ''; 
+  const postsContainer = document.querySelector(".post-grid");
+  postsContainer.innerHTML = "";
 
-    if (posts.length === 0) {
-        postsContainer.innerHTML = '<p>No posts available.</p>'; 
-        return;
-    }
+  if (posts.length === 0) {
+    postsContainer.innerHTML = "<p>No posts available.</p>";
+    return;
+  }
 
-    posts.forEach((post) => {
-        const postCard = document.createElement('div');
-        postCard.classList.add('post-card');
+  posts.forEach((post) => {
+    const postCard = document.createElement("div");
+    postCard.classList.add("post-card");
 
-        postCard.innerHTML = `
+    postCard.innerHTML = `
             <div class="post-image">
                 <a href="../post/index.html?id=${post.id}">
-                    <img src="${post.media?.url || 'https://via.placeholder.com/150x100'}" alt="Post Image">
+                    <img src="${
+                      post.media?.url || "https://via.placeholder.com/150x100"
+                    }" alt="Post Image">
                 </a>
             </div>
             <div class="post-title">
@@ -87,54 +102,45 @@ function renderPosts(posts) {
             </div>
         `;
 
-        postsContainer.appendChild(postCard);
-    });
+    postsContainer.appendChild(postCard);
+  });
 
-    //Event listeners for edit button
-    
-    document.querySelectorAll('.edit-btn').forEach(button => {
-        button.addEventListener('click', (e) => {
-            const postId = e.target.getAttribute('data-id');
-            window.location.href = `../post/edit.html?id=${postId}`; 
-        });
+  document.querySelectorAll(".edit-btn").forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const postId = e.target.dataset.id;
+      window.location.href = `../post/edit.html?id=${postId}`;
     });
+  });
 
-    //Event listeners for delete button
-
-    document.querySelectorAll('.delete-btn').forEach(button => {
-        button.addEventListener('click', (e) => {
-            const postId = e.target.getAttribute('data-id');
-            console.log('Deleting post with ID:', postId);  
-            deletePost(postId);  
-        });
+  document.querySelectorAll(".delete-btn").forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const postId = e.target.dataset.id;
+      deletePost(postId);
     });
+  });
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
-    checkLoginStatus();
-    const username = localStorage.getItem('username');
-    updateHeader(username);
+async function main() {
+  const username = localStorage.getItem("username");
+  let posts = [];
 
-    const posts = await fetchPosts();  
-    renderPosts(posts);  
+  showLoader();
+
+  if (username === "colorMuse") {
+    posts = await fetchPostsFromAPI();
+  } else {
+    posts = fetchPostsFromLocalStorage();
+  }
+
+  renderPosts(posts);
+  hideLoader();
+}
+document.addEventListener("DOMContentLoaded", () => {
+  checkLoginStatus();
+  main();
 });
 
-// Event listener for "Create Post" button
-
-document.querySelector('.create-post-btn').addEventListener('click', () => {
-    window.location.href = '../post/createPost.html';
+document.querySelector(".create-post-btn").addEventListener("click", () => {
+  window.location.href = "../post/createPost.html";
 });
 
-
-
-// References 😊:
-// Fetch API: Used for fetching data from the server. 🌐
-// MDN Docs - Fetch API: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
-
-// Local Storage: Storing user data like tokens locally. 🗃️
-// MDN Docs - Window.localStorage: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
-
-// Event Listeners: Attach event handlers to DOM elements like buttons. 🔗
-// MDN Docs - addEventListener(): https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
-
-// Guidance and suggestions provided by ChatGPT for improving code readability and structure.

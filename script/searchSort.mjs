@@ -6,19 +6,16 @@ export function sortAndFilterPosts(blogPosts) {
     const searchQuery = document.getElementById('search-bar').value.toLowerCase();
     const selectedTag = document.getElementById('tag-filter').value.toLowerCase();
 
-    console.log('Selected Tag:', selectedTag);
+    let filteredPosts = blogPosts;
 
-    // Filter by search query (title) first
-    let filteredPosts = blogPosts.filter(post => post.title.toLowerCase().includes(searchQuery));
+    // Filter by search query (title)
+    if (searchQuery) {
+        filteredPosts = filteredPosts.filter(post => post.title.toLowerCase().includes(searchQuery));
+    }
 
-    // Filter by the selected tag
+    // Filter by selected tag
     if (selectedTag) {
-        filteredPosts = filteredPosts.filter(post => {
-            const tagsArray = Array.isArray(post.tags) 
-                ? post.tags.map(tag => tag.toLowerCase()) 
-                : post.tags.split(',').map(tag => tag.trim().toLowerCase()); 
-            return tagsArray.includes(selectedTag);
-        });
+        filteredPosts = filteredPosts.filter(post => post.tags && post.tags.includes(selectedTag));
     }
 
     // Sort by date
@@ -35,11 +32,8 @@ export function sortAndFilterPosts(blogPosts) {
         filteredPosts.sort((a, b) => b.title.localeCompare(a.title));
     }
 
-    console.log("Filtered and sorted posts: ", filteredPosts); 
+    // Display the filtered and sorted posts
     displayBlogPosts(filteredPosts);
 }
 
-// References 😊:
-// The idea for filtering by tags and sorting is inspired by code snippets on Stack Overflow.
-// For more, refer to the discussion: https://stackoverflow.com/questions/63155747/sort-filter-multiple-arrays
-// Guidance and structural flow provided by ChatGPT for improving code readability.
+
