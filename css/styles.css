@@ -87,7 +87,6 @@ body {
     overflow: hidden;
 }
 
-
 @media (max-width: 768px) {
     .goals {
         grid-template-columns: 1fr;
@@ -105,7 +104,6 @@ body {
         padding: 20px;
     }
 }
-
 
 /*about page*/
 
@@ -227,7 +225,6 @@ body {
     margin-bottom: 8px;
 }
 
-
 #register-form input[type="text"],
 #register-form input[type="email"],
 #register-form input[type="password"] {
@@ -268,7 +265,6 @@ body {
     }
 }
 
-
 button {
     background: linear-gradient(90deg, #CB9EBB 0%, #E3B23C 48%, #FDBEB5 98.5%);
     border: none;
@@ -285,8 +281,6 @@ button:hover {
     background: var(--primary-color-1);
     font-weight: bold;
 }
-
-
 
 /* Carousel Styles */
 .carousel {
@@ -467,8 +461,6 @@ div > select {
     margin-right: 10px;
 }
 
-
-
   @media (max-width: 768px) {
     .sorting{
       display: flex;
@@ -486,8 +478,6 @@ div > select {
     }
   }
   
-
- 
   .manage-post-btn { 
    margin: 20px auto;
    align-items: center;
