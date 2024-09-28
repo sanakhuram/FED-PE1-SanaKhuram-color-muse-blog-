@@ -32,7 +32,8 @@ postForm.addEventListener('submit', async (event) => {
             alt: imageAltTextInput.value.trim() || 'Post Image'
         },
         tags: tagsArray,
-        author: localStorage.getItem('username') || 'Anonymous',  
+        author: localStorage.getItem('username') || 'Anonymous',
+        created: new Date().toISOString(),
     };
 
     try {

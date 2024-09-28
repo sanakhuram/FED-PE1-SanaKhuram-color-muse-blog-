@@ -58,7 +58,7 @@ async function loadPost() {
             postTitle.innerText = post.title || 'No title available';
             postImage.src = post.media?.url || 'https://via.placeholder.com/600x400?text=No+Image';
             postContent.innerText = post.body || 'No content available';
-            postAuthor.innerText = post.author?.name || 'Unknown Author';
+            postAuthor.innerText = typeof post.author === 'string' ? post.author : post.author?.name || 'Unknown Author';
             postCreated.innerText = post.created ? `Published on: ${new Date(post.created).toLocaleDateString()}` : 'Unknown';
             postUpdated.innerText = post.updated ? `Last updated on: ${new Date(post.updated).toLocaleDateString()}` : 'Not updated yet';
         } else {

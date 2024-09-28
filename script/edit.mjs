@@ -17,12 +17,12 @@ const saveButton = document.querySelector("button[type='submit']");
 const counterElement = document.getElementById("counter");
 const tagsInput = document.getElementById('tagsInput'); 
 
-// Fetch and handle blog post data based on the post ID from URL
+
 async function fetchPostData(postId) {
   const username = localStorage.getItem('username');
 
   if (username === 'colorMuse') {
-    // Fetch from API if user is `colorMuse`
+
     try {
       const response = await fetch(GET_BLOG_POST_BY_ID(postId));
       if (!response.ok) {
@@ -35,7 +35,7 @@ async function fetchPostData(postId) {
       return null;
     }
   } else {
-    // Fetch from local storage for regular users
+   
     const posts = JSON.parse(localStorage.getItem(`posts_${username}`)) || [];
     return posts.find(post => post.id === parseInt(postId));
   }
@@ -56,7 +56,7 @@ async function loadPostForEditing() {
     postTitleInput.value = post.title || "";
     postContentInput.value = post.body || "";
     tagsInput.value = (post.tags || []).join(", ");
-
+    
     updateCounter();
     postContentInput.addEventListener("input", updateCounter);
   } else {
@@ -65,7 +65,6 @@ async function loadPostForEditing() {
   hideLoader();  
 }
 
-// Updates character counter for the post content input
 function updateCounter() {
   const contentLength = postContentInput?.value.length || 0;
   if (counterElement) {
@@ -73,27 +72,33 @@ function updateCounter() {
   }
 }
 
-// Save changes (API for admin, localStorage for regular users)
 async function handleSaveChanges(e) {
   e.preventDefault();
-  showLoader();  
+  showLoader();
 
   const username = localStorage.getItem('username');
   const tagsArray = tagsInput.value.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0);
+
+
+  let posts = JSON.parse(localStorage.getItem(`posts_${username}`)) || [];
+  let originalPost = posts.find(post => post.id === parseInt(postId));
+
   const updatedPostData = {
-    id: postId, 
+    id: postId,
     title: postTitleInput?.value || "",
     body: postContentInput?.value || "",
     media: {
       url: imageURLInput?.value || "",
-      alt: imageAltTextInput?.value || "Post Image"  
+      alt: imageAltTextInput?.value || "Post Image"
     },
-    tags: tagsArray
+    tags: tagsArray,
+    created: originalPost?.created || new Date().toISOString(), 
+    updated: new Date().toISOString(), 
+    author: originalPost?.author || username  
   };
 
   try {
     if (username === 'colorMuse') {
-      // Admin: Update post via API
       const response = await fetch(UPDATE_BLOG_POST_BY_ID(postId), {
         method: "PUT",
         headers: {
@@ -112,7 +117,6 @@ async function handleSaveChanges(e) {
       }
     } else {
       // Regular User: Update post in localStorage
-      let posts = JSON.parse(localStorage.getItem(`posts_${username}`)) || [];
       posts = posts.map(post => post.id === parseInt(postId) ? updatedPostData : post);
       localStorage.setItem(`posts_${username}`, JSON.stringify(posts));
       alert("Post updated successfully!");
@@ -122,11 +126,9 @@ async function handleSaveChanges(e) {
     console.error("Error updating post:", error);
     alert(`Error updating post: ${error.message}`);
   } finally {
-    hideLoader();  
+    hideLoader();
   }
 }
-
-// Handles deletion of a blog post
 
 async function handleDeletePost() {
   const confirmDelete = confirm("Are you sure you want to delete this post?");
@@ -134,11 +136,10 @@ async function handleDeletePost() {
 
   const username = localStorage.getItem('username');
 
-  showLoader();  
+  showLoader();
 
   try {
     if (username === 'colorMuse') {
-      // Admin: Delete via API
       const response = await fetch(DELETE_POST_API_ENDPOINT(postId), {
         method: "DELETE",
         headers: {
@@ -156,7 +157,6 @@ async function handleDeletePost() {
       alert("Post deleted successfully!");
       window.location.href = "../index.html";
     } else {
-      // Regular User: Delete from localStorage
       let posts = JSON.parse(localStorage.getItem(`posts_${username}`)) || [];
       posts = posts.filter(post => post.id !== parseInt(postId));
       localStorage.setItem(`posts_${username}`, JSON.stringify(posts));
@@ -167,9 +167,11 @@ async function handleDeletePost() {
     console.error("Error deleting post:", error);
     alert(`Error deleting post: ${error.message}`);
   } finally {
-    hideLoader();  
+    hideLoader();
   }
 }
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
   if (saveButton) {
