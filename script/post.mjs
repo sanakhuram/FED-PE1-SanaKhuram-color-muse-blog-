@@ -20,7 +20,7 @@ const postUpdated = document.getElementById('updatedTime');
 function fetchPostFromLocalStorage(postId) {
     const username = localStorage.getItem('username');
     const posts = JSON.parse(localStorage.getItem(`posts_${username}`)) || [];
-    return posts.find(post => post.id === Number(postId));
+    return posts.find(post => post.id === Number(postId));  
 }
 
 async function fetchPostByIdFromAPI(postId) {

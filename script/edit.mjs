@@ -84,18 +84,19 @@ async function handleSaveChanges(e) {
   let originalPost = posts.find(post => post.id === parseInt(postId));
 
   const updatedPostData = {
-    id: postId,
+    id: Number(postId),  
     title: postTitleInput?.value || "",
     body: postContentInput?.value || "",
     media: {
-      url: imageURLInput?.value || "",
-      alt: imageAltTextInput?.value || "Post Image"
+        url: imageURLInput?.value || "",
+        alt: imageAltTextInput?.value || "Post Image"
     },
     tags: tagsArray,
-    created: originalPost?.created || new Date().toISOString(), 
-    updated: new Date().toISOString(), 
-    author: originalPost?.author || username  
-  };
+    created: originalPost?.created || new Date().toISOString(),
+    updated: new Date().toISOString(),
+    author: originalPost?.author || username
+};
+
 
   try {
     if (username === 'colorMuse') {
@@ -170,8 +171,6 @@ async function handleDeletePost() {
     hideLoader();
   }
 }
-
-
 
 document.addEventListener("DOMContentLoaded", () => {
   if (saveButton) {

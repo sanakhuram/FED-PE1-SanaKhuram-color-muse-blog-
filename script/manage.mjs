@@ -27,14 +27,13 @@ function fetchPostsFromLocalStorage() {
 
 function deletePostFromLocalStorage(postId) {
   const username = localStorage.getItem("username");
-  let posts = fetchPostsFromLocalStorage(); 
-  posts = posts.filter((post) => post.id !== parseInt(postId));
-
+  let posts = fetchPostsFromLocalStorage();
+  posts = posts.filter((post) => post.id !== Number(postId));  
   localStorage.setItem(`posts_${username}`, JSON.stringify(posts));
   alert("Post deleted successfully.");
-
   window.location.reload();
 }
+
 async function deletePost(postId) {
   const username = localStorage.getItem("username");
   const confirmDelete = confirm("Are you sure you want to delete this post?");
