@@ -25,7 +25,7 @@ The aim of this project was to utilize the knowledge gained in the **Frontend De
 - **Post Sharing**: Individual blog posts come with shareable URLs.
 - **Admin Dashboard**: Admins can log in to create, edit, or delete blog posts.
 - **Form Validation**: Integrated form validation for registration and login processes.
-- **API Integration**: RESTful API used to manage blog posts with GET, POST, PUT, and DELETE methods.
+- **API Integration**: API used to manage blog posts with GET, POST, PUT, and DELETE methods.
 
 ---
 
