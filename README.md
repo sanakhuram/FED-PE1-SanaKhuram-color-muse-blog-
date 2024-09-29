@@ -47,7 +47,7 @@ The aim of this project was to utilize the knowledge gained in the **Frontend De
 - **HTML5**: Structuring the web application.
 - **CSS3**: Designing responsive layouts and styling the UI.
 - **JavaScript (Vanilla)**: API integration, form validation, and interactive functionality.
-- **RESTful API**: For managing and displaying blog content (GET, POST, PUT, DELETE).
+- **API**: For managing and displaying blog content (GET, POST, PUT, DELETE).
 
 ---
 
