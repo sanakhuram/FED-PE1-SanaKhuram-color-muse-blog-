@@ -110,3 +110,8 @@ This project was developed as part of the **FED1 Frontend Development Exam**, wh
 - **Client-Specified Features**: Both regular users and admin functions have been fully implemented.
 - **No Frameworks**: In accordance with the exam guidelines, the project was developed without using external frameworks like React or Tailwind CSS. 
 
+## 📞 Contact
+
+For any inquiries or collaborations, feel free to reach out:
+
+- [Connect with me on LinkedIn](https://www.linkedin.com/in/sana-khuram-157ba02b7/)
