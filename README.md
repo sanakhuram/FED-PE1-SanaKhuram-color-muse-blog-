@@ -1,6 +1,7 @@
 # 🖼️ Color Muse Blog
 
-![Project Overview](https://i.postimg.cc/4NMFDNpV/project.jpg)
+![Color Muse Blog](https://github.com/user-attachments/assets/9360507a-9648-4942-b2d5-fbd9c1ae9d04)
+
 
 [Visit the live site here](https://color-muse-blog-project-exam-1.netlify.app/)
 
