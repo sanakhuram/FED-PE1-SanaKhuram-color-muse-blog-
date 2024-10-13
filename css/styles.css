@@ -337,6 +337,9 @@ button:hover {
     width: 90%;
 }
 
+h2#carousel-title {
+    text-shadow: 1px 1px 1px black;
+}
 /* Image Styles */
 .carousel-blog-post-image {
     max-width: 100%;
